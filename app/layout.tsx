@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
 import Footer from '@/components/footer'
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

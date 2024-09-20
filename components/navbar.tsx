@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { Home, Dumbbell, LogIn,User, MessageSquare, Settings } from 'lucide-react'
 
+
+
 export default function Navbar() {
-  const router = useRouter()
   const { user } = useUser()
 
   const isAdmin = user?.publicMetadata.role === 'admin'

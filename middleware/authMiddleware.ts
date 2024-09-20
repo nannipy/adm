@@ -9,7 +9,7 @@ export function withAuth(handler: any) {
       return res.status(401).json({ error: "Non autorizzato" });
     }
 
-    const userRole = sessionClaims?.metadata?.role as string;
+    const userRole = sessionClaims?.metadata;
 
     if (req.url?.startsWith("/api/admin") && userRole !== "admin") {
       return res.status(403).json({ error: "Accesso negato" });

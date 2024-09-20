@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { MongoClient, ObjectId } from 'mongodb'
+import { MongoClient } from 'mongodb'
 
 const uri = process.env.MONGODB_URI
-const client = new MongoClient(uri)
+const client = new MongoClient(uri as string)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(405).end(`Method ${req.method} Not Allowed`)
     }
   } catch (error) {
+    console.error('Errore nel database:', error)
     res.status(500).json({ error: 'Errore del server' })
   } finally {
     await client.close()

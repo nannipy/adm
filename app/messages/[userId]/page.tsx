@@ -13,7 +13,7 @@ interface Message {
 
 export default function Messages({ params }: { params: { userId: string } }) {
   const { user } = useUser()
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState('')
 
   useEffect(() => {

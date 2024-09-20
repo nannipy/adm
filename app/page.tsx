@@ -29,9 +29,6 @@ export default function Home() {
             <h3 className="text-2xl font-semibold mb-4 text-center text-black">Chat con il Coach</h3>
             <p className="text-center text-black">Comunicazione diretta con il tuo coach personale.</p>
             <div className="text-center mt-4">
-              <Link href="/chat" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition duration-300">
-                Vai alla Chat
-              </Link>
             </div>
           </div>
         </div>

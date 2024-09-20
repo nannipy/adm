@@ -3,10 +3,21 @@
 import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 
+interface Exercise {
+  id: string;
+  dayOfWeek: string;
+  workoutType: string;
+  name: string;
+  description: string;
+  videoUrl: string;
+  sets: number;
+  reps: number;
+  restSeconds: number;
+}
 
 export default function UserWorkout({ params }: { params: { userId: string } }) {
   const { user } = useUser()
-  const [exercises, setExercises] = useState<Exercise[]>([])
+  const [exercises] = useState<Exercise[]>([])
 
   useEffect(() => {
     // Implementa la logica per recuperare gli esercizi dell'utente dal database
