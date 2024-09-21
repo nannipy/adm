@@ -8,15 +8,15 @@ export default function Contact() {
       <form className="bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto">
         <div className="mb-4">
           <label htmlFor="name" className="block text-lg font-medium text-gray-700">Nome</label>
-          <input type="text" id="name" className="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="text" id="name" className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-black" required />
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
-          <input type="email" id="email" className="mt-1 block w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="email" id="email" className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-black" required />
         </div>
         <div className="mb-4">
           <label htmlFor="message" className="block text-lg font-medium text-gray-700">Messaggio</label>
-          <textarea id="message" className="mt-1 block w-full p-2 border border-gray-300 rounded-md" required></textarea>
+          <textarea id="message" className="mt-1 block w-full p-2 border border-gray-300 rounded-md text-black" required></textarea>
         </div>
         <button type="submit" className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-700 transition duration-300 w-full">Invia</button>
       </form>

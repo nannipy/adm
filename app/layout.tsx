@@ -30,7 +30,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} font-sans `}>
           <Navbar />
-          <main className="flex-1 overflow-y-auto p-4 mx-20 pb-10">
+          <main className="flex-1 overflow-y-auto p-4 mx-10 pb-10">
             {children}
           </main>
           <div className="hidden md:block">

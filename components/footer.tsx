@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className=" p-4 rounded-xl m-4 shadow-md ">
+    <footer className=" p-4 rounded-xl m-4 shadow-md z-auto">
       <div className="container mx-auto text-center">
         <p className="text-white text-lg">&copy; 2023 ADM Sport and Nutrition. Tutti i diritti riservati.</p>
         <div className="space-x-4 text-xl mt-4">
