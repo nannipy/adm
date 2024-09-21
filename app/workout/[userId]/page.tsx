@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useUser } from '@clerk/nextjs'
 import { format, startOfWeek, addDays, isSameDay, subWeeks, addWeeks } from 'date-fns'
 import { it } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -43,7 +42,6 @@ interface StatisticheFitness {
 }
 
 export default function CalendarioAllenamenti({ params }: { params: { userId: string } }) {
-  const { user } = useUser()
   const [allenamenti, setAllenamenti] = useState<Allenamento[]>([])
   const [dieta, setDieta] = useState<DietaGiornaliera | null>(null)
   const [settimanaCorrente, setSettimanaCorrente] = useState(startOfWeek(new Date(), { weekStartsOn: 1 }))

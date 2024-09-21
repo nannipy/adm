@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronLeft, ChevronDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import Link from 'next/link'
@@ -28,7 +27,6 @@ interface Allenamento {
 export default function SchedaAllenamento({ params }: { params: { userId: string, allenamentoID: string } }) {
   const [allenamento, setAllenamento] = useState<Allenamento | null>(null)
   const [esercizioAperto, setEsercizioAperto] = useState<number | null>(null)
-  const router = useRouter()
 
   useEffect(() => {
     // Qui dovresti recuperare i dettagli dell'allenamento dal tuo backend
