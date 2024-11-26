@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
-import { Home, Dumbbell, LogIn, User, MessageSquare, Settings } from 'lucide-react'
+import { Home, Dumbbell, LogIn, User, MessageSquare, Settings, BookMarked } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
@@ -25,6 +25,9 @@ export default function Navbar() {
             <SignedIn>
               <Link href={`/workout/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/workout/${user?.id}`)}`}>
                 Allenamento
+              </Link>
+              <Link href={`/info/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/info/${user?.id}`)}`}>
+                Esercizi
               </Link>
               {isAdmin && (
                 <Link href="/admin/create-workout" className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive('/admin/create-workout')}`}>
@@ -60,6 +63,9 @@ export default function Navbar() {
             <Link href={`/workout/${user?.id}`} className={`text-black p-5 mx-0 rounded-2xl hover:bg-gray-100 ${isActive(`/workout/${user?.id}`)}`}>
               <Dumbbell size={24} />
             </Link>
+            <Link href={`/info/${user?.id}`} className={`text-black p-5 rounded-2xl hover:bg-gray-100 ${isActive(`/info/${user?.id}`)}`}>
+              <BookMarked size={24} />
+              </Link>
             {isAdmin && (
               <Link href="/admin/create-workout" className={`text-black p-5 mx-0 rounded-2xl hover:bg-gray-100 ${isActive('/admin/create-workout')}`}>
                 <Settings size={24} />
