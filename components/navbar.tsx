@@ -26,7 +26,7 @@ export default function Navbar() {
               <Link href={`/workout/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/workout/${user?.id}`)}`}>
                 Allenamento
               </Link>
-              <Link href={`/info/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/info/${user?.id}`)}`}>
+              <Link href={`/manual/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/manual/${user?.id}`)}`}>
                 Esercizi
               </Link>
               {isAdmin && (
@@ -63,7 +63,7 @@ export default function Navbar() {
             <Link href={`/workout/${user?.id}`} className={`text-black p-5 mx-0 rounded-2xl hover:bg-gray-100 ${isActive(`/workout/${user?.id}`)}`}>
               <Dumbbell size={24} />
             </Link>
-            <Link href={`/info/${user?.id}`} className={`text-black p-5 rounded-2xl hover:bg-gray-100 ${isActive(`/info/${user?.id}`)}`}>
+            <Link href={`/manual/${user?.id}`} className={`text-black p-5 rounded-2xl hover:bg-gray-100 ${isActive(`/manual/${user?.id}`)}`}>
               <BookMarked size={24} />
               </Link>
             {isAdmin && (

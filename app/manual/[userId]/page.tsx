@@ -1071,7 +1071,7 @@ export default function Info() {
             transition={{ duration: 0.7 }}
             className="text-5xl font-extrabold text-center text-white mb-12 tracking-tight"
           >
-            Esercizi in Palestra
+            Manuale
           </motion.h1>
   
           <div className="space-y-6">

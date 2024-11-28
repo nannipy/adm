@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto mt-10 text-white ">
+    <div className="container mx-auto mt-10 text-white p-4 ">
       {/* Hero Section */}
       <motion.section 
         className="text-center"
@@ -29,7 +29,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
       >
         <h1 className="text-5xl font-bold mb-10 text-white">ADM Sport e Nutrizione</h1>
-        <p className="text-xl mb-8 text-blue-200">Trasforma il tuo corpo e la tua vita con il nostro coaching personalizzato</p>
+        <p className="text-xl mb-8 text-white">Trasforma il tuo corpo e la tua vita con il nostro coaching personalizzato</p>
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -53,9 +53,9 @@ export default function Home() {
       </motion.section>
 
       {/* Servizi */}
-      <section className="py-4">
+      <section className="py-2">
       <motion.section 
-        className="text-center py-20"
+        className="text-center py-10"
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
         variants={fadeIn}
