@@ -35,17 +35,11 @@ interface DietaGiornaliera {
   cena: Pasto;
 }
 
-interface StatisticheFitness {
-  calorieBruciate: number;
-  passi: number;
-  minutiAttività: number;
-}
 
 export default function CalendarioAllenamenti({ params }: { params: { userId: string } }) {
   const [allenamenti, setAllenamenti] = useState<Allenamento[]>([])
   const [dieta, setDieta] = useState<DietaGiornaliera | null>(null)
   const [settimanaCorrente, setSettimanaCorrente] = useState(startOfWeek(new Date(), { weekStartsOn: 1 }))
-  const [statisticheFitness, setStatisticheFitness] = useState<StatisticheFitness | null>(null)
   const [giornoSelezionato, setGiornoSelezionato] = useState<Date>(new Date())
 
   useEffect(() => {
@@ -82,15 +76,7 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
       }
     }
     setDieta(dietaEsempio)
-
-    // Qui dovresti recuperare le statistiche di fitness dal tuo backend o da API di fitness tracker
-    const statisticheEsempio: StatisticheFitness = {
-      calorieBruciate: 2500,
-      passi: 10000,
-      minutiAttività: 60
-    }
-    setStatisticheFitness(statisticheEsempio)
-  }, [settimanaCorrente, params.userId])
+  }, [settimanaCorrente])
 
   const giorniSettimana = Array.from({ length: 7 }, (_, i) => addDays(settimanaCorrente, i))
 
@@ -110,18 +96,18 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
     >
       <h1 className="text-3xl font-bold mb-6 text-center">Allenamenti e Dieta</h1>
       
-      <div className="flex justify-between items-center bg-white text-black rounded-t-xl p-4 -mx-8 ">
+      <div className="flex justify-between items-center bg-white text-black rounded-t-3xl p-4 -mx-8 ">
         <Button onClick={settimanaPrec} variant="outline" size="icon"><ChevronLeft /></Button>
         <span className="font-semibold text-lg">{format(settimanaCorrente, 'MMMM yyyy', { locale: it })}</span>
         <Button onClick={settimanaSucc} variant="outline" size="icon"><ChevronRight /></Button>
       </div>
 
-      <div className="grid grid-cols-7 gap-2 mb-6 bg-white text-black rounded-b-lg p-4 -mx-8">
+      <div className="grid grid-cols-7 gap-2 mb-6 bg-white text-black rounded-b-3xl p-4 -mx-8">
         {giorniSettimana.map((giorno, index) => (
           <motion.div 
             key={index}
             whileHover={{ scale: 1.05 }}
-            className={`border rounded-lg p-2 text-center cursor-pointer ${isSameDay(giorno, giornoSelezionato) ? 'bg-blue-500 text-white' : 'bg-black text-white'}`}
+            className={`border rounded-3xl p-2 text-center cursor-pointer ${isSameDay(giorno, giornoSelezionato) ? 'bg-blue-500 text-white' : 'bg-black text-white'}`}
             onClick={() => selezionaGiorno(giorno)}
           >
             <div className="text-sm">{format(giorno, 'EEE', { locale: it })}</div>
@@ -149,31 +135,11 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
           >
             <h2 className="text-2xl font-bold mb-4 px-4 text-center">{format(giornoSelezionato, 'EEEE d MMMM', { locale: it })}</h2>
             
-            {statisticheFitness && (
-              <Card className="mb-6 bg-white text-black mx-4">
-                <CardHeader>
-                  <h3 className="text-xl font-semibold text-center">Statistiche Fitness</h3>
-                </CardHeader>
-                <CardContent className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-red-500">{statisticheFitness.calorieBruciate}</p>
-                    <p className="text-sm">Calorie Bruciate</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-blue-500">{statisticheFitness.passi}</p>
-                    <p className="text-sm">Passi</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-green-500">{statisticheFitness.minutiAttività}</p>
-                    <p className="text-sm">Minuti di Attività</p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+           
 
             {allenamenti.find(a => isSameDay(a.data, giornoSelezionato)) && (
               <Link href={`/workout/${params.userId}/${allenamenti.find(a => isSameDay(a.data, giornoSelezionato))?.id}`}>
-              <Card className="mb-6 bg-white text-black mx-4">
+              <Card className="mb-2 rounded-3xl bg-white text-black mx-4">
                 <CardHeader>
                   <h3 className="text-xl font-semibold">Allenamento del Giorno</h3>
                 </CardHeader>
@@ -189,7 +155,7 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
             )}
 
             {dieta && 
-              <Card className="mb-32 bg-white text-black mx-4 text-center">
+              <Card className="mb-32 rounded-3xl bg-white text-black mx-4 text-center  ">
                 <CardHeader>
                   <h3 className="text-xl font-semibold "> 🍔 Dieta del Giorno</h3>
                 </CardHeader>

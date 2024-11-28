@@ -43,7 +43,7 @@ export default function Home() {
           </SignedOut>
             {user && (
               <Link href="/workout">
-                <button className="text-black bg-white p-4 rounded-full">
+                <button className="text-black bg-white p-4 rounded-3xl">
                   Vai alle schede
                 </button>
               </Link>
@@ -64,37 +64,37 @@ export default function Home() {
         <h2 className="text-3xl font-semibold text-center mb-12 text-white">I Nostri Servizi</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <motion.div 
-            className="bg-white p-8 rounded-lg shadow-md"
+            className="bg-white p-8 rounded-3xl shadow-md"
             whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(255,255,255)" }}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeIn}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.2, delay: 0.01 }}
           >
             
             <h3 className="text-2xl font-semibold mb-4 text-center text-blue-900">Coaching Sportivo</h3>
             <p className="text-center text-gray-700">Programmi di allenamento su misura per raggiungere i tuoi obiettivi fitness.</p>
           </motion.div>
           <motion.div 
-            className="bg-white p-8 rounded-lg shadow-md z-0"
+            className="bg-white p-8 rounded-3xl shadow-md z-0"
             whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(255,255,255)"  }}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeIn}
 
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.01 }}
           >
             <h3 className="text-2xl font-semibold mb-4 text-center text-blue-900">Consulenza Nutrizionale</h3>
             <p className="text-center text-gray-700">Piani alimentari personalizzati per ottimizzare la tua salute e le tue prestazioni.</p>
           </motion.div>
           <motion.div 
-            className="bg-white p-8 rounded-lg shadow-md"
+            className="bg-white p-8 rounded-3xl shadow-md"
             whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(255,255,255)" }}
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
             variants={fadeIn}
             
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.2, delay: 0.01}}
           >
             <h3 className="text-2xl font-semibold mb-4 text-center text-blue-900">Chat con il Coach</h3>
             <p className="text-center text-gray-700">Comunicazione diretta con il tuo coach personale.</p>
