@@ -1062,6 +1062,7 @@ export default function Info() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 mb-20 relative"
+        
       >
         <div className="max-w-4xl mx-auto">
           <motion.h1 
@@ -1080,16 +1081,16 @@ export default function Info() {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden"
+                className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden "
               >
                 <motion.div 
                   onClick={() => toggleCategory(category.category)}
-                  className="flex items-center justify-between p-6 cursor-pointer hover:bg-neutral-800 transition-colors"
+                  className="flex items-center justify-between p-6 cursor-pointer hover:bg-neutral-800 transition-colors "
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 bg-neutral-800/50 p-4 rounded-full">
                     {category.icon}
-                    <h2 className="text-2xl font-semibold text-white">
+                    <h2 className="text-2xl font-semibold text-white ">
                       {category.category}
                     </h2>
                   </div>
@@ -1114,16 +1115,17 @@ export default function Info() {
                         height: 0,
                         transition: { duration: 0.2 }
                       }}
-                      className="bg-neutral-800/50 p-6"
+                      className="bg-neutral-800/50 p-6 "
                     >
-                      <ul className="space-y-4">
+                      <ul className="space-y-4 ">
                         {category.exercises.map((exercise) => (
                           <motion.li 
                             key={exercise.name}
                             initial={{ x: -20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ duration: 0.3 }}
-                            className="flex justify-between items-center text-white hover:text-blue-300 transition-colors"
+                            className="flex justify-between items-center text-white hover:bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-4 rounded-3xl "
+                            onClick={() => handleExerciseDetails(exercise)}
                           >
                             <span className="text-lg font-medium">
                               {exercise.name}
@@ -1143,7 +1145,6 @@ export default function Info() {
                               "
                             >
                               Dettagli
-                              <ChevronDown className="w-4 h-4 ml-1" />
                             </button>
                           </motion.li>
                         ))}
@@ -1163,6 +1164,7 @@ export default function Info() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
+                
               >
                 <motion.div
                   initial={{ scale: 0.9, y: 50 }}
@@ -1175,7 +1177,8 @@ export default function Info() {
                     {/* Close Button */}
                     <button 
                       onClick={closeExerciseDetails}
-                      className="absolute top-4 right-4 z-10 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition-colors"
+                      
+                      className="absolute top-4 right-4 z-10 bg-white text-black rounded-full p-2  transition-colors"
                     >
                       <X className="w-6 h-6" />
                     </button>
@@ -1202,7 +1205,7 @@ export default function Info() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <h3 className="text-2xl font-semibold text-blue-500 mb-3">
+                        <h3 className="text-2xl font-semibold text-white mb-3">
                           Descrizione
                         </h3>
                         <p className="text-neutral-300 leading-relaxed">
@@ -1215,8 +1218,9 @@ export default function Info() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 }}
+                        className='mb-6 bg-neutral-800 p-4 rounded-lg'
                       >
-                        <h3 className="text-2xl font-semibold text-red-500 mb-3">
+                        <h3 className="text-2xl font-semibold text-red-600 mb-3">
                           Errori Comuni da Evitare
                         </h3>
                         <ul className="space-y-2">
@@ -1226,9 +1230,9 @@ export default function Info() {
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.4 + index * 0.1 }}
-                              className="text-red-300 flex items-center space-x-2"
+                              className="text-white flex items-center space-x-2"
                             >
-                              <span className="text-red-600">•</span>
+                              <span className="text-red-700">•</span>
                               <span>{error}</span>
                             </motion.li>
                           ))}
@@ -1240,8 +1244,9 @@ export default function Info() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 }}
+                        className='mb-6 bg-neutral-800 p-4 rounded-lg'
                       >
-                        <h3 className="text-2xl font-semibold text-green-500 mb-3">
+                        <h3 className="text-2xl font-semibold text-green-600 mb-3">
                           Soluzioni
                         </h3>
                         <ul className="space-y-2">
@@ -1251,9 +1256,9 @@ export default function Info() {
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.5 + index * 0.1 }}
-                              className="text-green-300 flex items-center space-x-2"
+                              className="text-white flex items-center space-x-2"
                             >
-                              <span className="text-green-600">✓</span>
+                              <span className="text-white">✓</span>
                               <span>{solution}</span>
                             </motion.li>
                           ))}
