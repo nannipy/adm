@@ -10,10 +10,13 @@ const Whatsapp = () => {
 
   const handleClick = () => {
     // Controlla se l'app WhatsApp è installata sul dispositivo
+    const url = `https://wa.me/${phoneNumber}`;
     if (navigator.userAgent.includes('WhatsApp')) {
       window.open(`whatsapp://send?phone=${phoneNumber}`);
+    } else if (navigator.userAgent.includes('Android')) {
+      window.open(`intent://${url}#Intent;scheme=https;package=com.whatsapp;end`);
     } else {
-      window.open(`https://web.whatsapp.com/send?phone=${phoneNumber}`, '_blank');
+      window.open(url, '_blank');
     }
   };
 
