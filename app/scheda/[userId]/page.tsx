@@ -220,81 +220,99 @@ const WorkoutScheda = () => {
   }
 
   const renderWorkoutTable = (workouts: Workout[]) => (
-    <table className="w-full text-white  ">
-      <thead className="bg-neutral-800 text-sm ">
-        <tr className=''>
-          <th className="p-2 text-left rounded-l-xl">Esercizio</th>
-          <th className="p-2 text-center">Serie</th>
-          <th className="p-2 text-center">Rep</th>
-          <th className="p-2 text-center">Rest</th>
-          <th className="p-2 text-left rounded-r-xl ">Note</th>
-        </tr>
-      </thead>
-      <tbody>
-        {workouts.map((workout, index) => (
-          <tr key={index} className="text-sm rounded-3xl justify-between items-center text-white p-4 ">
-            <td className="p-2 font-semibold">{workout.esercizio}</td>
-            <td className="p-2 text-center">{workout.serie}</td>
-            <td className="p-2 text-center">{workout.rep}</td>
-            <td className="p-2 text-center">{workout.rest}</td>
-            <td className="p-2 text-left ">
-              {workout.note.length > 0 && (
-                <ul className="text-sm overflow-hidden">
-                  {workout.note.map((note, noteIndex) => (
-                    <p key={noteIndex}>{note}</p>
-                  ))}
-                </ul>
-              )}
-            </td>
+    <div className="w-full overflow-x-auto">
+      <table className="w-full text-white border-separate border-spacing-y-2">
+        <thead className="bg-neutral-800 text-xs md:text-sm">
+          <tr>
+            <th className="p-2 text-left rounded-l-xl w-1/3 md:w-auto">Esercizio</th>
+            <th className="p-2 text-center w-16">Serie</th>
+            <th className="p-2 text-center w-16">Rep</th>
+            <th className="p-2 text-center w-16">Rest</th>
+            <th className="p-2 text-left rounded-r-xl w-1/3 md:w-auto">Note</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  )
+        </thead>
+        <tbody>
+          {workouts.map((workout, index) => (
+            <tr 
+              key={index} 
+              className="bg-neutral-900 hover:bg-neutral-800/80 transition-colors duration-200 ease-in-out"
+            >
+              <td className="p-2 font-semibold text-sm md:text-base break-words">
+                {workout.esercizio}
+              </td>
+              <td className="p-2 text-center text-xs md:text-sm">
+                {workout.serie}
+              </td>
+              <td className="p-2 text-center text-xs md:text-sm">
+                {workout.rep}
+              </td>
+              <td className="p-2 text-center text-xs md:text-sm">
+                {workout.rest}
+              </td>
+              <td className="p-2 text-left">
+                {workout.note.length > 0 && (
+                  <ul className="text-xs md:text-sm space-y-1">
+                    {workout.note.map((note, noteIndex) => (
+                      <li key={noteIndex} className="list-disc list-inside">
+                        {note}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 
   return (
-    <div className=" min-h-screen p-4 md:p-8 mb-16 md:mx-60">       
-
-      <Card className="bg-inherit  border-transparent ">
+    <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:px-20 xl:px-40">
+      <Card className="bg-transparent border-none shadow-none">
         <CardHeader className="text-center">
           <motion.h1 
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7 }}
-              className="text-5xl font-extrabold text-center text-white mb-3 tracking-tight"
-            >
-              Scheda
-            </motion.h1>
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-white mb-3 tracking-tight"
+          >
+            Scheda Allenamento
+          </motion.h1>
         </CardHeader>
-        <CardContent className='mt-4 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl p-8' >
+        
+        <CardContent className='mt-4 mb-20 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8'>
           <Tabs 
             value={activeTab} 
             onValueChange={setActiveTab} 
-            className="w-full "
+            className="w-full"
           >
-          <div className="flex space-x-1 mb-10 justify-center gap-10 bg-neutral-800/60 rounded-2xl  p-4 ">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`${
-                  activeTab === tab.id ? "" : "hover:text-white/60 "
-                } relative flex items-center justify-center  px-3 py-3 text-sm font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
-                style={{WebkitTapHighlightColor: "transparent",}}
-            >
-              {activeTab === tab.id && (
-            <motion.span
-              layoutId="bubble"
-              className="absolute inset-0 z-10 bg-white mix-blend-difference rounded-2xl"
-              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-            />
-          )}
-          {tab.label}
-        </button>
-      ))}
-    </div>
-
-            
+            <div className="flex justify-center mx-20 md:mx-96 space-x-2 sm:space-x-4 mb-6 sm:mb-10 bg-neutral-800/60 rounded-2xl p-2 sm:p-4">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
+                    relative flex items-center justify-center 
+                    px-2 sm:px-3 py-2 text-xs sm:text-sm 
+                    font-medium text-white 
+                    outline-sky-400 transition 
+                    focus-visible:outline-2
+                    ${activeTab === tab.id ? 'text-black' : 'hover:text-white/60'}
+                  `}
+                  style={{WebkitTapHighlightColor: "transparent"}}
+                >
+                  {activeTab === tab.id && (
+                    <motion.span
+                      layoutId="bubble"
+                      className="absolute inset-0 z-10 bg-white mix-blend-difference rounded-2xl"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  {tab.label}
+                </button>
+              ))}
+            </div>
             
             <TabsContent value="push">
               {renderWorkoutTable(workoutSections.push)}
@@ -310,9 +328,8 @@ const WorkoutScheda = () => {
           </Tabs>
         </CardContent>
       </Card>
-      
     </div>
-  )
-}
+  );
+};
 
-export default WorkoutScheda
+export default WorkoutScheda;
