@@ -5,6 +5,8 @@ import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'
 import Footer from '@/components/footer'
 import Whatsapp from "@/components/whatsapp"; 
+import Head from "next/head";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -19,7 +21,8 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "ADM Sport and Nutrition",
   description: "ADM Sport and Nutrition",
-};
+  }
+  
 
 export default function RootLayout({
   children,
@@ -29,6 +32,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <Head>
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+          <meta name="apple-mobile-web-app-title" content="Il mio sito" />
+        </Head>
         <body className={`${geistSans.variable} ${geistMono.variable} font-sans `}>
           <Navbar />
           <main className="flex-1 overflow-y-auto pb-10">
