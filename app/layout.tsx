@@ -21,6 +21,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "ADM Sport and Nutrition",
   description: "ADM Sport and Nutrition",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Il Mio Sito PWA',
+  },
   }
   
 
@@ -33,9 +38,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <Head>
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="apple-mobile-web-app-title" content="Il mio sito" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="theme-color" content="#ffffff" />
         </Head>
         <body className={`${geistSans.variable} ${geistMono.variable} font-sans `}>
           <Navbar />
