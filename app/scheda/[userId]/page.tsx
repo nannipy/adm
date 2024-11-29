@@ -6,7 +6,7 @@ import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { motion } from 'framer-motion';
 
 
-let tabs = [
+const tabs = [
   { id: "push", label: "PUSH" },
   { id: "pull", label: "PULL" },
   { id: "upper", label: "UPPER" },
