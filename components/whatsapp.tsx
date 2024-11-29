@@ -3,7 +3,7 @@
 'use client';
 
 import React from 'react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { MessageSquare } from 'lucide-react';
 
 const Whatsapp = () => {
   const phoneNumber = '+393341287766'; // Sostituisci con il tuo numero
@@ -19,10 +19,10 @@ const Whatsapp = () => {
 
   return (
     <div 
-      className="bg-green-600 w-min p-2 rounded-full fixed bottom-10 right-4 cursor-pointer"
+      className="bg-blue-700 p-4 mr-6 md:mr-2 rounded-full fixed bottom-32 z-50 right-4 cursor-pointer hover:bg-neutral-700 "
       onClick={handleClick}
     >
-      <FaWhatsapp color="white" className="w-7 h-7" />
+      <MessageSquare color="white" className="w-7 h-7" />
     </div>
   );
 };

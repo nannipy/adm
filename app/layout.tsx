@@ -34,8 +34,8 @@ export default function RootLayout({
           <main className="flex-1 overflow-y-auto pb-10">
             {children}
           </main>
+          <Whatsapp/>
           <div className="hidden md:block">
-            <Whatsapp/>
             <Footer />
           </div>
         </body>

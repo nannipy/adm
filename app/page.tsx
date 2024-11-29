@@ -55,7 +55,7 @@ export default function Home() {
       {/* Servizi */}
       <section className="py-2">
       <motion.section 
-        className="text-center py-10"
+        className="text-center py-10 mb-10 md:mb-0"
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
         variants={fadeIn}
@@ -110,9 +110,6 @@ export default function Home() {
         </div>
       </motion.section>
       </section>
-    
-
-      {/* ... resto del codice rimane invariato ... */}
     </div>
   )
 }

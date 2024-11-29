@@ -14,10 +14,8 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 
-
 // Expanded exercise categories with more exercises
-const exerciseCategories = [
-    {
+const exerciseCategories = [{
         category: 'Petto',
         icon: <Dumbbell className="text-blue-600" />,
         exercises: [
@@ -1020,13 +1018,11 @@ const exerciseCategories = [
                 'Mantenere un ritmo costante e controllato',
                 'Concentrarsi sull’attivazione degli addominali'
             ]
-            }
+          }
         ]
-        }
-];
-
-
-export default function Info() {
+      }
+    ];
+export default function Manual() {
     const [openCategory, setOpenCategory] = useState<string | null>(null);
     const [selectedExercise, setSelectedExercise] = useState<{
       name: string;
@@ -1088,7 +1084,7 @@ export default function Info() {
                   className="flex items-center justify-between p-6 cursor-pointer hover:bg-neutral-800 transition-colors "
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex items-center space-x-4 bg-neutral-800/50 p-4 rounded-full">
+                  <div className="flex items-center space-x-4 bg-neutral-800/50 p-4 rounded-3xl">
                     {category.icon}
                     <h2 className="text-2xl font-semibold text-white ">
                       {category.category}
@@ -1124,7 +1120,7 @@ export default function Info() {
                             initial={{ x: -20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ duration: 0.3 }}
-                            className="flex justify-between items-center text-white hover:bg-neutral-800 transition-colors hover:bg-neutral-800/50 p-4 rounded-3xl "
+                            className="flex justify-between items-center text-white hover:bg-neutral-800 transition-colors  p-4 rounded-3xl "
                             onClick={() => handleExerciseDetails(exercise)}
                           >
                             <span className="text-lg font-medium">

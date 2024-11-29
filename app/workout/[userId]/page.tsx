@@ -74,7 +74,14 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
       transition={{ duration: 0.5 }}
       className="text-white p-8 rounded-3xl mx-2 md:mx-auto md:max-w-2xl border-black "
     >
-      <h1 className="text-3xl font-bold mb-6 text-center ">Allenamenti e Dieta</h1>
+      <motion.h1 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="text-5xl font-extrabold text-center text-white mb-6 tracking-tight"
+          >
+            Calendario
+          </motion.h1>
       
       <div className="flex justify-between items-center bg-neutral-800/50 p-8 text-white rounded-t-3xl -mx-8 ">
         <Button onClick={settimanaPrec} className='bg-neutral-800/75 rounded-2xl' size="icon"><ChevronLeft /></Button>
@@ -145,9 +152,9 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
                     <p className="font-medium text-white">{dieta.colazione.nome}</p>
                     <p className="text-sm mt-1 text-white">{dieta.colazione.ricetta}</p>
                     <div className="flex justify-left space-x-4 mt-2 ">
-                      <span className="text-sm px-2 py-1 bg-red-100 text-red-800 rounded-full font-semibold">P: {dieta.colazione.macros.proteine}g</span>
-                      <span className="text-sm px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-semibold">C: {dieta.colazione.macros.carboidrati}g</span>
-                      <span className="text-sm px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full font-semibold">G: {dieta.colazione.macros.grassi}g</span>
+                      <span className="text-sm px-2 py-1 bg-red-200 text-red-800 rounded-full font-semibold">P: {dieta.colazione.macros.proteine}g</span>
+                      <span className="text-sm px-2 py-1 bg-blue-200 text-blue-800 rounded-full font-semibold">C: {dieta.colazione.macros.carboidrati}g</span>
+                      <span className="text-sm px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full font-semibold">G: {dieta.colazione.macros.grassi}g</span>
                     </div>
                     <p className="text-sm mt-2 text-white">Alternative: {dieta.colazione.alternative.join(", ")}</p>
                   </div>
@@ -156,9 +163,9 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
                     <p className="font-medium text-white">{dieta.pranzo.nome}</p>
                     <p className="text-sm mt-1 text-white">{dieta.pranzo.ricetta}</p>
                     <div className="flex justify-left space-x-4 mt-2">
-                      <span className="text-sm px-2 py-1 bg-red-100 text-red-800 rounded-full font-semibold">P: {dieta.pranzo.macros.proteine}g</span>
-                      <span className="text-sm px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-semibold">C: {dieta.pranzo.macros.carboidrati}g</span>
-                      <span className="text-sm px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full font-semibold">G: {dieta.pranzo.macros.grassi}g</span>
+                      <span className="text-sm px-2 py-1 bg-red-200 text-red-800 rounded-full font-semibold">P: {dieta.pranzo.macros.proteine}g</span>
+                      <span className="text-sm px-2 py-1 bg-blue-200 text-blue-800 rounded-full font-semibold">C: {dieta.pranzo.macros.carboidrati}g</span>
+                      <span className="text-sm px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full font-semibold">G: {dieta.pranzo.macros.grassi}g</span>
                     </div>
                     <p className="text-sm mt-2 text-white">Alternative: {dieta.pranzo.alternative.join(", ")}</p>
                   </div>
@@ -167,9 +174,9 @@ export default function CalendarioAllenamenti({ params }: { params: { userId: st
                     <p className="font-medium text-white">{dieta.cena.nome}</p>
                     <p className="text-sm mt-1 text-white">{dieta.cena.ricetta}</p>
                     <div className="flex justify-left space-x-4 mt-2">
-                      <span className="text-sm px-2 py-1 bg-red-100 text-red-800 rounded-full font-semibold">P: {dieta.cena.macros.proteine}g</span>
-                      <span className="text-sm px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-semibold">C: {dieta.cena.macros.carboidrati}g</span>
-                      <span className="text-sm px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full font-semibold">G: {dieta.cena.macros.grassi}g</span>
+                      <span className="text-sm px-2 py-1 bg-red-200 text-red-800 rounded-full font-semibold">P: {dieta.cena.macros.proteine}g</span>
+                      <span className="text-sm px-2 py-1 bg-blue-200 text-blue-800 rounded-full font-semibold">C: {dieta.cena.macros.carboidrati}g</span>
+                      <span className="text-sm px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full font-semibold">G: {dieta.cena.macros.grassi}g</span>
                     </div>
                     <p className="text-sm mt-2 text-white">Alternative: {dieta.cena.alternative.join(", ")}</p>
                   </div>

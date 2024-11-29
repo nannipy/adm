@@ -73,7 +73,7 @@ export default function SchedaAllenamento({ params }: { params: { userId: string
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-gray-900 w-[calc(100%-2px)] mx-auto "
+      className="text-gray-900 w-[calc(100%-2px)] mx-auto p-4 sm:p-8"
     >
       <Link href={`/workout/${params.userId}`}>
         <Button variant="outline" size="icon" className="mb-4 rounded-full bg-white text-black">
