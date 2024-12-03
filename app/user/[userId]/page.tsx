@@ -84,7 +84,7 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Profilo Utente</h1>
-      <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+      <div className="bg-white rounded-3xl shadow-md p-6 max-w-2xl mx-auto">
         <div className="flex items-center mb-6">
           <Avatar className="h-24 w-24 mr-4 text-black font-bold text-2xl">
             <AvatarImage src={user?.imageUrl} alt={user?.fullName || 'Utente'} />
@@ -117,15 +117,15 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
           <div className="mt-6 text-center">
             {modifica ? (
               <>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600 transition-colors">
+                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-xl mr-2 hover:bg-blue-600 transition-colors">
                   Salva
                 </button>
-                <button type="button" onClick={toggleModifica} className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400 transition-colors">
+                <button type="button" onClick={toggleModifica} className="bg-gray-300 text-black px-4 py-2 rounded-xl hover:bg-gray-400 transition-colors">
                   Annulla
                 </button>
               </>
             ) : (
-              <button type="button" onClick={toggleModifica} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">
+              <button type="button" onClick={toggleModifica} className="bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors">
                 Modifica
               </button>
             )}

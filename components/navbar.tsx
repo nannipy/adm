@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
-import { FileText, Home, Dumbbell, LogIn, User, Settings, BookMarked } from 'lucide-react'
+import { FileText, Home, Dumbbell, LogIn, User, Settings, BookMarked,MessageSquare} from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Navbar() {
   const { user } = useUser()
@@ -19,11 +20,10 @@ export default function Navbar() {
       <nav className="hidden md:flex bg-white p-6 rounded-full m-4 mx-40">
         <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-black text-4xl font-bold mx-16 ">
-                ADM
-              </Link>
+          <Image src="/images/logo.png" alt="Logo" width={100} height={100} />        
+        </Link>
           <div className="space-x-4 text-xl px-10">
             <SignedIn>
-           
               <Link href={`/workout/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/workout/${user?.id}`)}`}>
                 Allenamento
               </Link>
@@ -33,12 +33,15 @@ export default function Navbar() {
               <Link href={`/manual/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/manual/${user?.id}`)}`}>
                 Manuale
               </Link>
+              <Link href={`/messages/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/messages/${user?.id}`)}`}>
+                Messaggi
+              </Link>
               {isAdmin && (
                 <Link href="/admin/create-workout" className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive('/admin/create-workout')}`}>
                   Crea Allenamento
                 </Link>
               )}
-             
+              
               <Link href={`/user/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/user/${user?.id}`)}`}>
                 Profilo
               </Link>
@@ -69,6 +72,9 @@ export default function Navbar() {
             </Link>
             <Link href={`/manual/${user?.id}`} className={`text-black p-5 rounded-2xl hover:bg-gray-100 ${isActive(`/manual/${user?.id}`)}`}>
               <BookMarked size={24} />
+              </Link>
+              <Link href={`/messages/${user?.id}`} className={`text-black p-4 rounded-full hover:bg-gray-100 ${isActive(`/messages/${user?.id}`)}`}>
+                <MessageSquare size={24}/>
               </Link>
             {isAdmin && (
               <Link href="/admin/create-workout" className={`text-black p-5 mx-0 rounded-2xl hover:bg-gray-100 ${isActive('/admin/create-workout')}`}>

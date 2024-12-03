@@ -59,14 +59,14 @@ export default function Messages({ params }: { params: { userId: string } }) {
   }
 
   return (
-    <div className="py-8 md:max-w-full  md:px-1 max-w-full">
+    <div className="py-4 md:max-w-full max-h-full md:px-1 px-4  ">
       <h1 className="text-3xl font-bold mb-6 text-center">Chat con il Coach</h1>
-      <div className="bg-white rounded-lg shadow-md p-2 w-full">
-        <div className="h-[calc(100vh-400px)] overflow-y-auto mb-4">
-          <header className="flex items-center mb-4 bg-black p-3 rounded-lg">
+      <div className="bg-white rounded-3xl shadow-md p-3">
+      <header className="flex items-center mb-4 bg-black p-3 rounded-3xl">
             <h2 className="text-lg md:text-xl font-semibold text-white mr-3">Coach </h2>
             <User size={20} className="text-white" />
           </header>
+        <div className="h-[480px] overflow-y-scroll py-0 duration-300 transition ">
           <AnimatePresence>
             {messages.map((message) => (
               <motion.div
@@ -77,8 +77,8 @@ export default function Messages({ params }: { params: { userId: string } }) {
                 transition={{ duration: 0.3 }}
                 className={`mb-3 ${message.isCoach ? 'text-left' : 'text-right'}`}
               >
-                <div className={`inline-block p-2 rounded-lg text-black ${message.isCoach ? 'bg-blue-200' : 'bg-gray-300'}`}>
-                  <p className="text-sm md:text-base text-black">{message.content}</p>
+                <div className={`inline-block p-2 rounded-lg text-black  ${message.isCoach ? 'bg-blue-200' : 'bg-gray-300'}`}>
+                  <p className="text-sm md:text-base text-black ">{message.content}</p>
                   <small className="text-xs text-black">{message.timestamp.toLocaleString()}</small>
                 </div>
               </motion.div>
@@ -91,7 +91,7 @@ export default function Messages({ params }: { params: { userId: string } }) {
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="flex-grow mr-2 p-2 border text-black rounded-full text-sm"
+            className="flex-grow mr-2 p-2 border text-black rounded-full text-sm mt-2"
             placeholder="Scrivi un messaggio..."
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
