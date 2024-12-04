@@ -465,7 +465,7 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
                 "
                 >
                 <LogOut className="w-5 h-5 mr-2 group-hover:rotate-6 transition-transform" />
-                Esci dall'Account
+                Esci dall&apos; Account
               </motion.button>
               </div>
             </div>
