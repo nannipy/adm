@@ -26,7 +26,7 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
   const { signOut } = useClerk()
   const [profilo, setProfilo] = useState<UserProfile | null>(null)
   const [modifica, setModifica] = useState(false)
-  const [originalProfile, setOriginalProfile] = useState<UserProfile | null>(null)
+  const [ setOriginalProfile] = useState<UserProfile | null>(null)
   
   // New state for password change
   const [passwordChange, setPasswordChange] = useState({
