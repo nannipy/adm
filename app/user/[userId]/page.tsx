@@ -26,9 +26,10 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
   const { signOut } = useClerk()
   const [profilo, setProfilo] = useState<UserProfile | null>(null)
   const [modifica, setModifica] = useState(false)
-  const [ setOriginalProfile] = useState<UserProfile | null>(null)
   
-  // New state for password change
+  // Remove unused state if not needed
+  const [, setOriginalProfile] = useState<UserProfile | null>(null)
+
   const [passwordChange, setPasswordChange] = useState({
     currentPassword: '',
     newPassword: '',
@@ -42,9 +43,10 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
       if (savedProfile) {
         const parsedProfile = JSON.parse(savedProfile)
         setProfilo(parsedProfile)
+        // Use the setter without capturing the value
         setOriginalProfile(parsedProfile)
       } else {
-        const profiloIniziale = {
+        const profiloIniziale: UserProfile = {
           nome: user.firstName || '',
           cognome: user.lastName || '',
           email: user.emailAddresses[0]?.emailAddress || '',
@@ -57,6 +59,7 @@ export default function ProfiloUtente({ params }: { params: { userId: string } }
       }
     }
   }, [user])
+
 
 
   const handleLogout = async () => {
