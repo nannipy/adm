@@ -5,855 +5,847 @@ import {
   Dumbbell, 
   ChevronDown, 
   ChevronUp, 
-  Target,
   BicepsFlexed,
-  Footprints,
   Flame,
-  Scaling,
   X
 } from 'lucide-react';
 import Image from 'next/image';
 
 // Expanded exercise categories with more exercises
-const exerciseCategories = [{
-        category: 'Petto',
-        icon: <Dumbbell className="text-blue-600" />,
-        exercises: [
-          { 
-            name: 'Panca Piana', 
-            link: '/esercizi/panca-piana',
-            description: 'Un esercizio fondamentale per lo sviluppo dei muscoli pettorali, che coinvolge principalmente il grande pettorale e in misura minore i tricipiti e i deltoid anteriori.',
-            photo: '/images/panca-piana.jpg',
-            commonErrors: [
-              'Sollevare i glutei dalla panca',
-              'Spingere con una sola mezza asse',
-              'Staccare la schiena dalla panca',
-              'Usare un range of motion troppo corto'
-            ],
-            solutions: [
-              'Mantenere i glutei sempre a contatto con la panca',
-              'Spingere simmetricamente con entrambi i lati',
-              'Mantenere la schiena completamente aderente alla panca',
-              'Eseguire il movimento su tutto il range di movimento'
-            ]
-          },
-          {
-            name: 'Croci con Manubri',
-            link: '/esercizi/croci-manubri',
-            description: 'Esercizio di isolamento che lavora specificamente sui muscoli pettorali, favorendo lo stretching e la contrazione del muscolo.',
-            photo: '/images/croci-manubri.jpg',
-            commonErrors: [
-              'Flettere troppo i gomiti',
-              'Sollevare troppo peso',
-              'Non mantenere i gomiti leggermente flessi',
-              'Movimento non controllato'
-            ],
-            solutions: [
-              'Mantenere un leggero angolo di gomito costante',
-              'Scegliere un peso che consenta una corretta esecuzione',
-              'Usare un peso che permetta di mantenere i gomiti sempre leggermente piegati',
-              'Eseguire il movimento in modo lento e controllato'
-            ]
-          },
-          {
-            name: 'Panca Inclinata',
-            link: '/esercizi/panca-inclinata',
-            description: 'Esercizio che enfatizza la parte superiore del grande pettorale, coinvolgendo anche i tricipiti e i deltoidi anteriori.',
-            photo: '/images/panca-inclinata.jpg',
-            commonErrors: [
-              'Non mantenere i piedi a terra',
-              'Usare un angolo troppo ripido sulla panca',
-              'Spingere troppo velocemente'
-            ],
-            solutions: [
-              'Poggiare saldamente i piedi a terra',
-              'Regolare la panca a un angolo di circa 30-45 gradi',
-              'Eseguire una spinta lenta e controllata'
-            ]
-          },
-          {
-            name: 'Panca Declinata',
-            link: '/esercizi/panca-declinata',
-            description: 'Esercizio che concentra lo sforzo sulla parte inferiore del grande pettorale.',
-            photo: '/images/panca-declinata.jpg',
-            commonErrors: [
-              'Non stabilizzare i piedi',
-              'Usare un range of motion incompleto'
-            ],
-            solutions: [
-              'Assicurarsi che i piedi siano saldi nei supporti',
-              'Muoversi lungo tutto il range di movimento per un maggiore coinvolgimento muscolare'
-            ]
-          },
-          {
-            name: 'Dips',
-            link: '/esercizi/dips',
-            description: 'Esercizio a corpo libero per allenare i pettorali, i tricipiti e i deltoidi.',
-            photo: '/images/dips.jpg',
-            commonErrors: [
-              'Scendere troppo velocemente',
-              'Non mantenere una postura corretta',
-              'Usare un range of motion limitato'
-            ],
-            solutions: [
-              'Controllare la fase discendente del movimento',
-              'Mantenere il busto inclinato leggermente in avanti',
-              'Eseguire un movimento completo e fluido'
-            ]
-          },
-          {
-            name: 'Push-Up',
-            link: '/esercizi/push-up',
-            description: 'Esercizio base per il petto, adatto a tutti i livelli di allenamento.',
-            photo: '/images/push-up.jpg',
-            commonErrors: [
-              'Non mantenere il corpo in linea',
-              'Non scendere abbastanza',
-              'Movimento troppo veloce'
-            ],
-            solutions: [
-              'Tenere il corpo ben allineato, attivando il core',
-              'Assicurarsi che il petto sfiori il pavimento',
-              'Eseguire il movimento in modo lento e controllato'
-            ]
-          },
-          {
-            name: 'Croci ai Cavi',
-            link: '/esercizi/croci-cavi',
-            description: 'Esercizio che permette un movimento controllato per isolare i muscoli pettorali.',
-            photo: '/images/croci-cavi.jpg',
-            commonErrors: [
-              'Non mantenere una postura stabile',
-              'Portare i cavi troppo in alto o troppo in basso',
-              'Non controllare il movimento'
-            ],
-            solutions: [
-              'Tenere i piedi ben saldi a terra',
-              'Allineare i cavi con i pettorali',
-              'Eseguire il movimento lentamente per evitare oscillazioni'
-            ]
-          },
-          {
-            name: 'Piegamenti con Applauso',
-            link: '/esercizi/piegamenti-applauso',
-            description: 'Esercizio esplosivo per aumentare la forza e la potenza dei pettorali.',
-            photo: '/images/piegamenti-applauso.jpg',
-            commonErrors: [
-              'Non esplodere abbastanza',
-              'Perdere la posizione corretta',
-              'Cadere troppo velocemente'
-            ],
-            solutions: [
-              'Concentrare l’energia sulla spinta esplosiva',
-              'Mantenere il core attivato per la stabilità',
-              'Controllare la discesa dopo l’applauso'
-            ]
-          },
-          {
-            name: 'Press con Fascia Elastica',
-            link: '/esercizi/press-elastico',
-            description: 'Esercizio che permette di allenare il petto con tensione progressiva.',
-            photo: '/images/press-elastico.jpg',
-            commonErrors: [
-              'Non fissare correttamente la fascia',
-              'Utilizzare un movimento troppo veloce'
-            ],
-            solutions: [
-              'Assicurarsi che la fascia sia ben ancorata',
-              'Eseguire il movimento lentamente per massimizzare la tensione'
-            ]
-          },
-          {
-            name: 'Panca con Catene',
-            link: '/esercizi/panca-catene',
-            description: 'Variante della panca che aumenta progressivamente la resistenza.',
-            photo: '/images/panca-catene.jpg',
-            commonErrors: [
-              'Sbilanciarsi durante il movimento',
-              'Usare una posizione errata della catena'
-            ],
-            solutions: [
-              'Mantenere una posizione stabile',
-              'Assicurarsi che le catene siano ben distribuite per aumentare gradualmente il carico'
-            ]
-          },
-          {
-            name: 'Hex Press',
-            link: '/esercizi/hex-press',
-            description: 'Esercizio che enfatizza la contrazione dei muscoli pettorali premendo i manubri insieme.',
-            photo: '/images/hex-press.jpg',
-            commonErrors: [
-              'Non premere abbastanza i manubri',
-              'Usare un peso troppo pesante'
-            ],
-            solutions: [
-              'Premere saldamente i manubri l’uno contro l’altro',
-              'Scegliere un peso adeguato per eseguire correttamente l’esercizio'
-            ]
-          },
-          {
-            name: 'Floor Press',
-            link: '/esercizi/floor-press',
-            description: 'Esercizio che riduce il range di movimento, ideale per proteggere le spalle.',
-            photo: '/images/floor-press.jpg',
-            commonErrors: [
-              'Non mantenere il controllo del peso',
-              'Usare un movimento troppo rapido'
-            ],
-            solutions: [
-              'Eseguire un movimento lento e controllato',
-              'Utilizzare un carico gestibile'
-            ]
-          }
-        ]
+const exerciseCategories = [
+  {
+    category: 'Petto',  
+    icon: <Dumbbell className="text-blue-600" />,
+    exercises: [
+      {
+        name: 'Panca Piana con Bilanciere',
+        link: '/esercizi/panca-piana-bilanciere',
+        description: 'Esercizio multiarticolare che costruisce forza e massa muscolare nel petto, coinvolgendo anche i tricipiti e i deltoidi anteriori.',
+        photo: '/images/panca-piana-bilanciere.jpg',
+        commonErrors: [
+          'Sollevare i glutei dalla panca',
+          'Spingere in modo asimmetrico',
+          'Usare un range di movimento incompleto',
+        ],
+        solutions: [
+          'Mantenere i glutei sempre aderenti alla panca',
+          'Spingere con entrambe le braccia in modo simmetrico',
+          'Eseguire il movimento su tutto il range, toccando il petto con il bilanciere',
+        ],
       },
       {
-        category: 'Braccia',
-        icon: <BicepsFlexed className="text-purple-600" />,
-        exercises: [
-          {
-            name: 'Bicep Curl',
-            link: '/esercizi/bicep-curl',
-            description: 'Esercizio fondamentale per isolare e sviluppare i bicipiti.',
-            photo: '/images/bicep-curl.jpg',
-            commonErrors: [
-              'Usare slancio per sollevare il peso',
-              'Curvare la schiena durante il movimento',
-              'Sollevare i pesi troppo velocemente senza controllo'
-            ],
-            solutions: [
-              'Mantenere il corpo fermo durante l’esercizio',
-              'Eseguire il movimento lentamente e controllato',
-              'Tenere la schiena dritta e concentrarsi sulla contrazione del bicipite'
-            ]
-          },
-          {
-            name: 'Hammer Curl',
-            link: '/esercizi/hammer-curl',
-            description: 'Variante del bicep curl che lavora sui muscoli brachiali e sui bicipiti.',
-            photo: '/images/hammer-curl.jpg',
-            commonErrors: [
-              'Sollevare i pesi con il corpo',
-              'Non mantenere un angolo corretto del gomito',
-              'Non controllare la discesa del peso'
-            ],
-            solutions: [
-              'Mantenere i gomiti vicini al corpo durante l’esercizio',
-              'Controllare la discesa dei pesi e non usare slancio',
-              'Eseguire l’esercizio in modo lento e controllato'
-            ]
-          },
-          {
-            name: 'Tricep Dips',
-            link: '/esercizi/tricep-dips',
-            description: 'Esercizio per lavorare i tricipiti, utilizzando una panca o parallele.',
-            photo: '/images/tricep-dips.jpg',
-            commonErrors: [
-              'Inarcare la schiena durante il movimento',
-              'Non scendere abbastanza durante la discesa',
-              'Non mantenere il controllo sulla fase di risalita'
-            ],
-            solutions: [
-              'Tenere la schiena dritta e il core contratto',
-              'Scendere fino a formare un angolo di 90 gradi nei gomiti',
-              'Controllare il movimento e evitare di usare slancio'
-            ]
-          },
-          {
-            name: 'Overhead Tricep Extension',
-            link: '/esercizi/overhead-tricep-extension',
-            description: 'Esercizio per isolare i tricipiti, eseguito con manubrio sopra la testa.',
-            photo: '/images/overhead-tricep-extension.jpg',
-            commonErrors: [
-              'Inarcare la schiena durante il movimento',
-              'Non mantenere i gomiti fermi',
-              'Usare un carico eccessivo'
-            ],
-            solutions: [
-              'Tenere la schiena dritta e il core contratto',
-              'Mantenere i gomiti vicini alla testa e non muoverli durante l’esercizio',
-              'Usare un peso adeguato per una tecnica corretta'
-            ]
-          },
-          {
-            name: 'Close-Grip Bench Press',
-            link: '/esercizi/close-grip-bench-press',
-            description: 'Esercizio che coinvolge i tricipiti, eseguito sulla panca piana.',
-            photo: '/images/close-grip-bench-press.jpg',
-            commonErrors: [
-              'Non allineare bene le mani con le spalle',
-              'Lasciare cadere i pesi troppo velocemente',
-              'Curvare la schiena durante il movimento'
-            ],
-            solutions: [
-              'Posizionare le mani a distanza ridotta sulla barra, mantenendo i gomiti stretti',
-              'Controllare la discesa dei pesi e spingere con potenza',
-              'Tenere la schiena aderente alla panca e il core attivato'
-            ]
-          },
-          {
-            name: 'Barbell Curl',
-            link: '/esercizi/barbell-curl',
-            description: 'Esercizio per i bicipiti, eseguito con bilanciere.',
-            photo: '/images/barbell-curl.jpg',
-            commonErrors: [
-              'Flettere la schiena per sollevare il peso',
-              'Non controllare la fase negativa del movimento',
-              'Usare un carico troppo elevato'
-            ],
-            solutions: [
-              'Mantenere la schiena dritta e concentrarsi sulla contrazione del bicipite',
-              'Controllare la discesa e non permettere al peso di cadere',
-              'Scegliere un carico che permetta una buona esecuzione'
-            ]
-          },
-          {
-            name: 'Tricep Pushdown',
-            link: '/esercizi/tricep-pushdown',
-            description: 'Esercizio con cavo per isolare i tricipiti.',
-            photo: '/images/tricep-pushdown.jpg',
-            commonErrors: [
-              'Non mantenere i gomiti fermi',
-              'Usare un carico troppo elevato che impedisce il controllo',
-              'Flettere troppo i polsi durante l’esercizio'
-            ],
-            solutions: [
-              'Mantenere i gomiti vicino al corpo e fermi durante il movimento',
-              'Usare un carico adeguato per eseguire correttamente l’esercizio',
-              'Eseguire il movimento lentamente, mantenendo il controllo del cavo'
-            ]
-          },
-          {
-            name: 'Concentration Curl',
-            link: '/esercizi/concentration-curl',
-            description: 'Esercizio per isolare i bicipiti, eseguito con manubrio.',
-            photo: '/images/concentration-curl.jpg',
-            commonErrors: [
-              'Mosse rapide o slancio nel movimento',
-              'Non mantenere una postura corretta',
-              'Non controllare il peso nella fase negativa'
-            ],
-            solutions: [
-              'Eseguire il movimento lentamente e senza slancio',
-              'Mantenere una postura stabile e una presa salda',
-              'Controllare la discesa e concentrarsi sulla contrazione del bicipite'
-            ]
-          },
-          {
-            name: 'Cable Bicep Curl',
-            link: '/esercizi/cable-bicep-curl',
-            description: 'Curl eseguito con cavo, per migliorare la resistenza continua sul bicipite.',
-            photo: '/images/cable-bicep-curl.jpg',
-            commonErrors: [
-              'Inarcare la schiena durante il movimento',
-              'Usare slancio per sollevare il peso',
-              'Flettere troppo i polsi'
-            ],
-            solutions: [
-              'Mantenere la schiena dritta e il corpo fermo',
-              'Sollevare il peso con un movimento controllato',
-              'Mantenere i polsi in posizione neutra durante l’esercizio'
-            ]
-          },
-          {
-            name: 'Zottman Curl',
-            link: '/esercizi/zottman-curl',
-            description: 'Esercizio che combina il bicep curl e il reverse curl per allenare bicipiti e avambracci.',
-            photo: '/images/zottman-curl.jpg',
-            commonErrors: [
-              'Usare slancio per eseguire l’esercizio',
-              'Non ruotare completamente il polso',
-              'Non eseguire correttamente la fase di discesa'
-            ],
-            solutions: [
-              'Eseguire l’esercizio lentamente e senza slancio',
-              'Ruotare completamente i polsi durante la fase di sollevamento',
-              'Controllare la fase di discesa per evitare movimenti rapidi'
-            ]
-          }
-        ]
+        name: 'Panca Inclinata con Bilanciere',
+        link: '/esercizi/panca-inclinata-bilanciere',
+        description: 'Concentra il lavoro sulla parte alta del petto, coinvolgendo in modo secondario i deltoidi anteriori.',
+        photo: '/images/panca-inclinata-bilanciere.jpg',
+        commonErrors: [
+          'Scendere troppo velocemente',
+          'Inclinare la schiena eccessivamente',
+          'Non abbassare completamente il bilanciere',
+        ],
+        solutions: [
+          'Controllare la fase eccentrica del movimento',
+          'Mantenere una posizione stabile e neutrale della schiena',
+          'Abbassare il bilanciere fino a sfiorare il petto',
+        ],
       },
+      {
+        name: 'Panca Decline con Bilanciere',
+        link: '/esercizi/panca-decline-bilanciere',
+        description: 'Favorisce lo sviluppo della parte inferiore del petto, riducendo lo stress sulle spalle.',
+        photo: '/images/panca-decline-bilanciere.jpg',
+        commonErrors: [
+          'Sollevare il peso con uno slancio',
+          'Non completare il movimento',
+        ],
+        solutions: [
+          'Usare un peso controllato per eseguire il movimento in modo fluido',
+          'Spingere fino a completa estensione del gomito',
+        ],
+      },
+      {
+        name: 'Panca Piana con Manubri',
+        link: '/esercizi/panca-piana-manubri',
+        description: 'Permette un range di movimento maggiore rispetto al bilanciere, attivando maggiormente il petto.',
+        photo: '/images/panca-piana-manubri.jpg',
+        commonErrors: [
+          'Movimento asimmetrico',
+          'Caduta del controllo nei punti estremi del movimento',
+        ],
+        solutions: [
+          'Spingere con entrambi i manubri in modo sincronizzato',
+          'Evitare di estendere troppo le braccia in alto o di scendere oltre il limite articolare',
+        ],
+      },
+      {
+        name: 'Croci su Panca Inclinata con Manubri',
+        link: '/esercizi/croci-panca-inclinata',
+        description: 'Esercizio di isolamento per il petto alto, ideale per sviluppare la definizione muscolare.',
+        photo: '/images/croci-panca-inclinata.jpg',
+        commonErrors: [
+          'Flettere troppo i gomiti',
+          'Usare un peso troppo pesante',
+          'Non controllare il movimento',
+        ],
+        solutions: [
+          'Mantenere i gomiti leggermente piegati',
+          'Usare un carico che consenta un’esecuzione corretta',
+          'Eseguire il movimento lentamente e con controllo',
+        ],
+      },
+      {
+        name: 'Chest Dip alle Parallele',
+        link: '/esercizi/dip-petto',
+        description: 'Esercizio multiarticolare che colpisce il petto inferiore e i tricipiti.',
+        photo: '/images/dip-petto.jpg',
+        commonErrors: [
+          'Non inclinare il busto in avanti',
+          'Non scendere abbastanza',
+          'Sovraccaricare senza controllo',
+        ],
+        solutions: [
+          'Inclina il busto in avanti per concentrarti sul petto',
+          'Scendi finché le spalle sono allineate ai gomiti',
+          'Usa un carico che puoi gestire in sicurezza',
+        ],
+      },
+      {
+        name: 'Pec Deck (Butterfly)',
+        link: '/esercizi/pec-deck',
+        description: 'Macchinario che isola i pettorali, ottimo per stretching e contrazione muscolare.',
+        photo: '/images/pec-deck.jpg',
+        commonErrors: [
+          'Eccessiva apertura delle braccia',
+          'Movimento troppo rapido',
+          'Postura scorretta',
+        ],
+        solutions: [
+          'Regolare il sedile per un’adeguata apertura del petto',
+          'Eseguire il movimento lentamente e con controllo',
+          'Mantenere una postura stabile e le spalle abbassate',
+        ],
+      },
+      {
+        name: 'Pullover con Manubrio',
+        link: '/esercizi/pullover-manubrio',
+        description: 'Lavora sia il petto che i dorsali, ottimo per espandere la gabbia toracica.',
+        photo: '/images/pullover-manubrio.jpg',
+        commonErrors: [
+          'Usare un peso eccessivo',
+          'Non controllare la fase negativa',
+        ],
+        solutions: [
+          'Usare un peso che consenta una corretta esecuzione',
+          'Controllare il movimento durante la discesa',
+        ],
+      },
+      {
+        name: 'Croci ai Cavi',
+        link: '/esercizi/croci-cavi',
+        description: 'Esercizio che isola i pettorali con una tensione costante grazie ai cavi.',
+        photo: '/images/croci-cavi.jpg',
+        commonErrors: [
+          'Usare un peso eccessivo',
+          'Non completare l’arco del movimento',
+        ],
+        solutions: [
+          'Scegliere un carico adatto al controllo',
+          'Eseguire il movimento completamente, incrociando leggermente le mani davanti al petto',
+        ],
+      },
+      {
+        name: 'Spinte ai Cavi su Panca Inclinata',
+        link: '/esercizi/spinte-cavi-inclinata',
+        description: 'Concentra il lavoro sulla parte alta del petto con tensione costante.',
+        photo: '/images/spinte-cavi-inclinata.jpg',
+        commonErrors: [
+          'Movimento non sincronizzato',
+          'Eccessiva spinta delle spalle',
+        ],
+        solutions: [
+          'Spingere entrambe le braccia in modo sincronizzato',
+          'Mantenere il focus sul petto, senza coinvolgere troppo le spalle',
+        ],
+      },
+    ],
+  },
+  {
+    category: 'Bicipiti',
+    icon: <BicepsFlexed className="text-purple-600" />,
+    exercises: [
+      {
+        name: 'Curl con Bilanciere',
+        link: '/esercizi/curl-bilanciere',
+        description: 'Esercizio classico per lo sviluppo della massa e della forza dei bicipiti, che coinvolge l\'intero muscolo in un movimento completo.',
+        photo: '/images/curl-bilanciere.jpg',
+        commonErrors: [
+          'Utilizzo di slancio del corpo',
+          'Movimento non controllato',
+          'Gomiti che si staccano dal busto',
+          'Range di movimento incompleto'
+        ],
+        solutions: [
+          'Mantenere il corpo fermo, isolando il movimento dei bicipiti',
+          'Eseguire il movimento lentamente e con controllo',
+          'Tenere i gomiti aderenti ai lati del corpo',
+          'Eseguire il movimento su tutto il range, dalla completa estensione al massimo picco di contrazione'
+        ],
+      },
+      {
+        name: 'Curl con Manubri',
+        link: '/esercizi/curl-manubri',
+        description: 'Permette un movimento più naturale rispetto al bilanciere, con possibilità di ruotare i polsi e lavorare i bicipiti da angolazioni diverse.',
+        photo: '/images/curl-manubri.jpg',
+        commonErrors: [
+          'Movimento asimmetrico',
+          'Rotazione dei polsi non corretta',
+          'Sollevamento dei gomiti',
+          'Uso di un peso eccessivo'
+        ],
+        solutions: [
+          'Eseguire il movimento in modo sincronizzato e controllato',
+          'Ruotare leggermente i polsi durante il sollevamento per massima contrazione',
+          'Mantenere i gomiti fermi vicino al corpo',
+          'Scegliere un peso che consenta una corretta esecuzione tecnica'
+        ],
+      },
+      {
+        name: 'Curl con Cavi',
+        link: '/esercizi/curl-cavi',
+        description: 'Offre una tensione costante durante tutto il movimento, stimolando i bicipiti in modo diverso rispetto ai pesi liberi.',
+        photo: '/images/curl-cavi.jpg',
+        commonErrors: [
+          'Movimento troppo veloce',
+          'Non mantenere la tensione costante',
+          'Utilizzare tutto il corpo per sollevare',
+          'Posizione scorretta'
+        ],
+        solutions: [
+          'Eseguire il movimento lentamente e controllato',
+          'Mantenere sempre una leggera tensione sui cavi',
+          'Isolare il movimento dei bicipiti, evitando movimento del corpo',
+          'Posizionarsi correttamente rispetto alla macchina dei cavi'
+        ],
+      },
+      {
+        name: 'Curl Concentrato',
+        link: '/esercizi/curl-concentrato',
+        description: 'Esercizio di isolamento che permette di concentrarsi su un singolo braccio, ottimo per correggere squilibri muscolari.',
+        photo: '/images/curl-concentrato.jpg',
+        commonErrors: [
+          'Movimento non controllato',
+          'Gomito che si muove durante l\'esecuzione',
+          'Non completare il range di movimento',
+          'Posizione scorretta sulla panca'
+        ],
+        solutions: [
+          'Eseguire il movimento lentamente e con precisione',
+          'Mantenere il gomito fermo contro l\'interno coscia',
+          'Portare il manubrio completamente su e giù',
+          'Posizionarsi correttamente sulla panca, con il gomito ben appoggiato'
+        ],
+      },
+      {
+        name: 'Curl Hammer',
+        link: '/esercizi/curl-hammer',
+        description: 'Variante del curl che lavora principalmente il muscolo brachiale e la parte esterna del bicipite, migliorando lo sviluppo complessivo del braccio.',
+        photo: '/images/curl-hammer.jpg',
+        commonErrors: [
+          'Movimento non controllato',
+          'Oscillazione del corpo',
+          'Non mantenere i polsi stabili',
+          'Range di movimento incompleto'
+        ],
+        solutions: [
+          'Controllare il movimento in fase di salita e discesa',
+          'Mantenere il corpo fermo, isolando il movimento dei bicipiti',
+          'Mantenere i polsi in posizione neutra durante tutto il movimento',
+          'Eseguire il movimento su tutto il range, dalla completa estensione al massimo picco di contrazione'
+        ],
+      },
+      {
+        name: 'Curl con Bilanciere al Cavo Basso',
+        link: '/esercizi/curl-bilanciere-cavo-basso',
+        description: 'Variante che offre una resistenza costante e permette di lavorare i bicipiti da un angolo diverso rispetto ai curl tradizionali.',
+        photo: '/images/curl-bilanciere-cavo-basso.jpg',
+        commonErrors: [
+          'Movimento troppo veloce',
+          'Sollevamento dei gomiti',
+          'Non mantenere la tensione',
+          'Uso di un peso eccessivo'
+        ],
+        solutions: [
+          'Eseguire il movimento lentamente e controllato',
+          'Mantenere i gomiti fermi lungo i fianchi',
+          'Mantenere una tensione costante durante tutto il movimento',
+          'Scegliere un carico che consenta una corretta esecuzione tecnica'
+        ],
+      },
+      {
+        name: 'Curl su Panca Scott',
+        link: '/esercizi/curl-panca-scott',
+        description: 'Esercizio di isolamento che permette di lavorare i bicipiti con un supporto che impedisce movimenti compensatori.',
+        photo: '/images/curl-panca-scott.jpg',
+        commonErrors: [
+          'Sollevare i gomiti dalla panca',
+          'Non completare il range di movimento',
+          'Movimento non controllato',
+          'Uso di un peso eccessivo'
+        ],
+        solutions: [
+          'Mantenere i gomiti ben appoggiati sulla panca',
+          'Portare il bilanciere o il manubrio completamente su e giù',
+          'Eseguire il movimento con controllo e precisione',
+          'Scegliere un carico che permetta una corretta esecuzione tecnica'
+        ],
+      },
+      {
+        name: 'Curl Inverso',
+        link: '/esercizi/curl-inverso',
+        description: 'Esercizio che lavora prevalentemente l\'avambraccio e la parte esterna del bicipite, migliorando la forza e la definizione del braccio.',
+        photo: '/images/curl-inverso.jpg',
+        commonErrors: [
+          'Movimento non controllato',
+          'Utilizzo di slancio',
+          'Non mantenere i polsi stabili',
+          'Range di movimento incompleto'
+        ],
+        solutions: [
+          'Eseguire il movimento lentamente e con precisione',
+          'Isolare il movimento, evitando oscillazioni del corpo',
+          'Mantenere i polsi stabili in posizione neutra',
+          'Eseguire il movimento su tutto il range di movimento'
+        ],
+      },
+      {
+        name: 'Curl Preacher',
+        link: '/esercizi/curl-preacher',
+        description: 'Esercizio di isolamento che permette di lavorare i bicipiti con un supporto che impedisce compensazioni e movimenti scorretti.',
+        photo: '/images/curl-preacher.jpg',
+        commonErrors: [
+          'Sollevare i gomiti dal supporto',
+          'Movimento troppo veloce',
+          'Non completare il range di movimento',
+          'Uso di un peso eccessivo'
+        ],
+        solutions: [
+          'Mantenere i gomiti ben appoggiati sul supporto',
+          'Eseguire il movimento lentamente e controllato',
+          'Portare il bilanciere o il manubrio completamente su e giù',
+          'Scegliere un carico che consenta una corretta esecuzione tecnica'
+        ],
+      },
+      {
+        name: 'Curl con Elastico',
+        link: '/esercizi/curl-elastico',
+        description: 'Esercizio versatile che permette di allenare i bicipiti con una resistenza progressiva e adatta a diversi livelli di fitness.',
+        photo: '/images/curl-elastico.jpg',
+        commonErrors: [
+          'Movimento non controllato',
+          'Non mantenere la tensione dell\'elastico',
+          'Range di movimento incompleto',
+          'Posizione scorretta'
+        ],
+        solutions: [
+          'Eseguire il movimento lentamente e con precisione',
+          'Mantenere una tensione costante sull\'elastico',
+          'Eseguire il movimento su tutto il range, dalla completa estensione al massimo picco di contrazione',
+          'Posizionarsi correttamente per un movimento efficace'
+        ],
+      }
+    ],
+  },
       {
         category: 'Schiena',
-        icon: <Target className="text-green-600" />,
+        icon: <Dumbbell className="text-green-600" />,
         exercises: [
           {
-            name: 'Lat Pulldown',
-            link: '/esercizi/lat-pulldown',
-            description: 'Esercizio che coinvolge il grande dorsale e altri muscoli della schiena, ideale per migliorare la larghezza della schiena.',
-            photo: '/images/lat-pulldown.jpg',
+            name: 'Stacco da Terra',
+            link: '/esercizi/stacco-da-terra',
+            description: 'Esercizio fondamentale per sviluppare forza e massa su tutta la catena posteriore, con focus sui lombari, dorsali e trapezio.',
+            photo: '/images/stacco-da-terra.jpg',
             commonErrors: [
-              'Usare slancio per abbassare la barra',
-              'Tirare la barra dietro il collo',
-              'Non contrarre completamente i dorsali'
+              'Incurvare la schiena',
+              'Non attivare il core',
+              'Alzare il peso con le braccia',
             ],
             solutions: [
-              'Eseguire il movimento in modo controllato',
-              'Portare la barra al petto anziché dietro il collo',
-              'Concentrarsi sulla contrazione dei dorsali alla fine del movimento'
-            ]
-          },
-          {
-            name: 'Pull-Up',
-            link: '/esercizi/pull-up',
-            description: 'Esercizio a corpo libero per rafforzare il grande dorsale, il bicipite e altri muscoli stabilizzatori.',
-            photo: '/images/pull-up.jpg',
-            commonErrors: [
-              'Usare slancio per tirarsi su',
-              'Non estendere completamente le braccia nella fase di discesa',
-              'Non attivare i muscoli della schiena'
+              'Mantenere la schiena neutra durante tutto il movimento',
+              'Contrarre gli addominali per stabilizzare il core',
+              'Spingere con le gambe, non tirare con le braccia',
             ],
-            solutions: [
-              'Eseguire movimenti lenti e controllati',
-              'Estendere completamente le braccia tra una ripetizione e l’altra',
-              'Concentrarsi sull’attivazione dei dorsali durante la trazione'
-            ]
           },
           {
             name: 'Rematore con Bilanciere',
             link: '/esercizi/rematore-bilanciere',
-            description: 'Esercizio multiarticolare per lavorare sui dorsali, il trapezio e la parte bassa della schiena.',
+            description: 'Esercizio multiarticolare che colpisce i dorsali, il trapezio e i romboidi, migliorando la densità della schiena.',
             photo: '/images/rematore-bilanciere.jpg',
             commonErrors: [
-              'Curvare la schiena durante il movimento',
-              'Usare troppo peso, compromettendo la tecnica',
-              'Non tirare il bilanciere fino al petto'
+              'Incurvare la schiena',
+              'Non portare il bilanciere verso l’addome',
+              'Usare uno slancio eccessivo',
             ],
             solutions: [
-              'Mantenere la schiena neutra e il core attivo',
-              'Utilizzare un carico adeguato',
-              'Tirare il bilanciere fino al petto con un movimento controllato'
-            ]
+              'Mantenere la schiena dritta e stabile',
+              'Tirare il bilanciere verso l’ombelico',
+              'Eseguire il movimento lentamente senza usare lo slancio',
+            ],
           },
           {
-            name: 'T-Bar Row',
-            link: '/esercizi/t-bar-row',
-            description: 'Esercizio mirato per aumentare lo spessore della schiena, coinvolgendo dorsali, trapezio e romboidi.',
-            photo: '/images/t-bar-row.jpg',
+            name: 'Pull-Up (Trazioni alla Sbarra)',
+            link: '/esercizi/pull-up',
+            description: 'Esercizio a corpo libero che sviluppa forza nei dorsali, bicipiti e romboidi.',
+            photo: '/images/pull-up.jpg',
             commonErrors: [
-              'Usare slancio per sollevare il carico',
-              'Non mantenere la schiena piatta',
-              'Limitare il range di movimento'
+              'Usare uno slancio per completare il movimento',
+              'Non scendere completamente',
+              'Non attivare le scapole',
             ],
             solutions: [
-              'Eseguire il movimento con controllo',
-              'Tenere la schiena neutra durante tutto l’esercizio',
-              'Lavorare su un range di movimento completo'
-            ]
+              'Eseguire il movimento in modo controllato',
+              'Scendere completamente per un range di movimento completo',
+              'Attivare le scapole prima di tirare',
+            ],
           },
           {
-            name: 'Deadlift',
-            link: '/esercizi/deadlift',
-            description: 'Esercizio fondamentale per sviluppare forza e muscoli in tutta la catena posteriore, inclusa la schiena.',
-            photo: '/images/deadlift.jpg',
+            name: 'Lat Machine Avanti',
+            link: '/esercizi/lat-machine-avanti',
+            description: 'Esercizio guidato per isolare i dorsali e migliorare la larghezza della schiena.',
+            photo: '/images/lat-machine-avanti.jpg',
             commonErrors: [
-              'Curvare la schiena durante il sollevamento',
-              'Sollecitare troppo le braccia anziché la schiena',
-              'Non portare il bilanciere vicino al corpo'
+              'Non abbassare completamente la barra',
+              'Usare un peso troppo elevato',
+              'Tirare con le braccia anziché con i dorsali',
             ],
             solutions: [
-              'Mantenere la schiena neutra e il core contratto',
-              'Usare la schiena e le gambe per sollevare il peso',
-              'Far scorrere il bilanciere lungo le gambe durante il movimento'
-            ]
+              'Portare la barra fino al petto',
+              'Utilizzare un carico che consenta una corretta esecuzione',
+              'Concentrarsi sull’attivazione dei dorsali durante la tirata',
+            ],
           },
           {
-            name: 'Seated Cable Row',
-            link: '/esercizi/seated-cable-row',
-            description: 'Esercizio per lo spessore della schiena che coinvolge dorsali, trapezio e romboidi.',
-            photo: '/images/seated-cable-row.jpg',
+            name: 'Rematore con Manubrio',
+            link: '/esercizi/rematore-manubrio',
+            description: 'Esercizio unilaterale per lavorare i dorsali e migliorare la simmetria muscolare.',
+            photo: '/images/rematore-manubrio.jpg',
             commonErrors: [
-              'Usare troppo peso, compromettendo la tecnica',
-              'Non mantenere la schiena dritta',
-              'Non completare la contrazione della schiena'
+              'Incurvare la schiena',
+              'Usare troppo slancio',
+              'Non completare il range di movimento',
             ],
             solutions: [
-              'Usare un peso adeguato per eseguire il movimento correttamente',
-              'Tenere la schiena dritta e il core attivato',
-              'Contrarre completamente i muscoli della schiena alla fine del movimento'
-            ]
+              'Mantenere la schiena neutra',
+              'Eseguire il movimento lentamente e con controllo',
+              'Portare il manubrio fino al fianco',
+            ],
           },
           {
-            name: 'Face Pull',
+            name: 'Pullover ai Cavi',
+            link: '/esercizi/pullover-cavi',
+            description: 'Isola i dorsali, con tensione costante grazie ai cavi.',
+            photo: '/images/pullover-cavi.jpg',
+            commonErrors: [
+              'Usare il peso delle spalle',
+              'Non mantenere i gomiti leggermente piegati',
+            ],
+            solutions: [
+              'Concentrarsi sull’attivazione dei dorsali',
+              'Mantenere i gomiti fissi e leggermente piegati durante tutto il movimento',
+            ],
+          },
+          {
+            name: 'Rematore T-Bar',
+            link: '/esercizi/rematore-t-bar',
+            description: 'Concentra il lavoro sulla parte centrale della schiena, coinvolgendo anche i bicipiti.',
+            photo: '/images/rematore-t-bar.jpg',
+            commonErrors: [
+              'Usare un carico eccessivo',
+              'Non controllare la fase negativa',
+              'Eseguire un range di movimento incompleto',
+            ],
+            solutions: [
+              'Usare un peso gestibile per mantenere una forma corretta',
+              'Controllare il movimento nella fase di discesa',
+              'Completare il range portando il peso vicino al petto',
+            ],
+          },
+          {
+            name: 'Shrug con Bilanciere',
+            link: '/esercizi/shrug-bilanciere',
+            description: 'Esercizio per il trapezio, utile per sviluppare la parte alta della schiena.',
+            photo: '/images/shrug-bilanciere.jpg',
+            commonErrors: [
+              'Usare uno slancio con il corpo',
+              'Non elevare le spalle completamente',
+            ],
+            solutions: [
+              'Eseguire il movimento lentamente, senza slancio',
+              'Alzare le spalle il più possibile',
+            ],
+          },
+          {
+            name: 'Iperestensioni Lombari',
+            link: '/esercizi/iperestensioni-lombari',
+            description: 'Concentrato sui lombari, migliora la forza della parte bassa della schiena.',
+            photo: '/images/iperestensioni-lombari.jpg',
+            commonErrors: [
+              'Inarcare troppo la schiena',
+              'Non contrarre i glutei durante il movimento',
+            ],
+            solutions: [
+              'Mantenere la schiena neutra',
+              'Contrarre i glutei per stabilizzare il movimento',
+            ],
+          },
+          {
+            name: 'Face Pull ai Cavi',
             link: '/esercizi/face-pull',
-            description: 'Esercizio per rafforzare i muscoli della parte superiore della schiena, ideale per migliorare la postura.',
+            description: 'Ottimo per migliorare la postura, lavorando i romboidi e il trapezio.',
             photo: '/images/face-pull.jpg',
             commonErrors: [
-              'Usare troppo peso, sacrificando la forma',
-              'Non mantenere il gomito all’altezza corretta',
-              'Tirare con le braccia anziché con i muscoli della schiena'
+              'Usare un carico eccessivo',
+              'Non portare le mani verso il viso',
             ],
             solutions: [
-              'Utilizzare un peso moderato per un movimento controllato',
-              'Tenere i gomiti all’altezza delle spalle durante il movimento',
-              'Concentrarsi sull’attivazione dei romboidi e del trapezio'
-            ]
+              'Scegliere un carico che consenta il controllo',
+              'Eseguire il movimento tirando verso il viso con controllo',
+            ],
           },
-          {
-            name: 'Hyperextension',
-            link: '/esercizi/hyperextension',
-            description: 'Esercizio per rafforzare la parte bassa della schiena e i glutei.',
-            photo: '/images/hyperextension.jpg',
-            commonErrors: [
-              'Curvare la schiena oltre il range naturale',
-              'Non controllare il movimento',
-              'Usare slancio per completare l’esercizio'
-            ],
-            solutions: [
-              'Mantenere la schiena neutra durante tutto l’esercizio',
-              'Eseguire il movimento lentamente e con controllo',
-              'Limitare il range di movimento per evitare eccessivi sforzi'
-            ]
-          },
-          {
-            name: 'Pullover con Manubrio',
-            link: '/esercizi/pullover-manubrio',
-            description: 'Esercizio che coinvolge dorsali e pettorali, utile anche per migliorare la mobilità delle spalle.',
-            photo: '/images/pullover-manubrio.jpg',
-            commonErrors: [
-              'Usare troppo peso, sacrificando la forma',
-              'Non mantenere il controllo nella fase di discesa',
-              'Non attivare correttamente i dorsali'
-            ],
-            solutions: [
-              'Utilizzare un peso adeguato per un’esecuzione controllata',
-              'Mantenere il movimento lento e fluido',
-              'Concentrarsi sull’attivazione dei dorsali durante l’esercizio'
-            ]
-          },
-          {
-            name: 'Reverse Fly',
-            link: '/esercizi/reverse-fly',
-            description: 'Esercizio per i muscoli della parte superiore della schiena, utile per correggere la postura e prevenire infortuni.',
-            photo: '/images/reverse-fly.jpg',
-            commonErrors: [
-              'Usare troppo peso e perdere il controllo',
-              'Non mantenere la schiena dritta',
-              'Eseguire un range di movimento troppo limitato'
-            ],
-            solutions: [
-              'Usare un peso moderato e controllato',
-              'Tenere la schiena neutra e il core attivato',
-              'Eseguire un range di movimento completo per massimizzare il lavoro sui muscoli'
-            ]
-          }
-        ]
+        ],
       },
       {
         category: 'Gambe',
-        icon: <Footprints className="text-red-600" />,
+        icon: <Dumbbell className="text-green-600" />,
         exercises: [
-          { 
-            name: 'Squat con Bilanciere', 
+          {
+            name: 'Squat con Bilanciere',
             link: '/esercizi/squat-bilanciere',
-            description: 'Esercizio fondamentale per allenare i quadricipiti, i glutei e i muscoli posteriori della coscia, coinvolgendo anche il core per la stabilizzazione.',
+            description: 'Esercizio fondamentale per lo sviluppo complessivo della forza delle gambe, coinvolgendo quadricipiti, glutei, femorali e stabilizzatori core.',
             photo: '/images/squat-bilanciere.jpg',
             commonErrors: [
-              'Non mantenere la schiena dritta',
-              'Superare le ginocchia con le punte dei piedi',
-              'Sollevare i talloni durante l’esecuzione'
+              'Cedimento delle ginocchia verso l\'interno',
+              'Non raggiungere la profondità corretta',
+              'Sollevare i talloni durante il movimento',
+              'Inclinare eccessivamente il busto in avanti'
             ],
             solutions: [
-              'Mantenere una postura eretta con il core contratto',
-              'Spingere indietro i fianchi durante il movimento',
-              'Poggiare sempre il peso sui talloni'
-            ]
-          },
-          {
-            name: 'Affondi', 
-            link: '/esercizi/affondi',
-            description: 'Esercizio per gambe e glutei che coinvolge il quadricipite e i muscoli posteriori della coscia in modo isolato.',
-            photo: '/images/affondi.jpg',
-            commonErrors: [
-              'Perdere l’equilibrio durante l’affondo',
-              'Non abbassarsi abbastanza',
-              'Ginocchio anteriore che supera la punta del piede'
+              'Spingere le ginocchia verso l\'esterno durante il movimento',
+              'Scendere fino a che i fianchi siano sotto il livello delle ginocchia',
+              'Mantenere i piedi completamente a terra, distribuendo il peso',
+              'Mantenere la schiena dritta e il busto più verticale possibile'
             ],
-            solutions: [
-              'Mantenere il tronco dritto e il core contratto',
-              'Scendere finché la coscia è parallela al pavimento',
-              'Assicurarsi che il ginocchio non superi la punta del piede'
-            ]
           },
           {
-            name: 'Leg Press', 
+            name: 'Leg Press',
             link: '/esercizi/leg-press',
-            description: 'Esercizio di isolamento per allenare i quadricipiti e i glutei, con un carico facilmente regolabile.',
+            description: 'Esercizio per lo sviluppo dei quadricipiti, glutei e femorali, con minore stress sulla colonna vertebrale rispetto agli squat.',
             photo: '/images/leg-press.jpg',
             commonErrors: [
-              'Non mantenere la schiena aderente al supporto',
-              'Bloccare completamente le ginocchia alla fine del movimento',
-              'Usare troppo peso'
+              'Sollevare i glutei dalla seduta',
+              'Estendere completamente le ginocchia',
+              'Non controllare la fase negativa del movimento',
+              'Posizionamento errato dei piedi'
             ],
             solutions: [
-              'Tenere la schiena completamente aderente al supporto',
-              'Evitare di bloccare le ginocchia per proteggere le articolazioni',
-              'Utilizzare un carico gestibile'
-            ]
+              'Mantenere la schiena completamente aderente alla seduta',
+              'Fermarsi prima dell\'estensione completa per mantenere tensione muscolare',
+              'Controllare lentamente la discesa del peso',
+              'Posizionare i piedi alla larghezza delle spalle, centrati sulla pedana'
+            ],
           },
           {
-            name: 'Stacchi Rumeni',
-            link: '/esercizi/stacchi-rumeni',
-            description: 'Esercizio per rafforzare i muscoli posteriori della coscia, i glutei e la parte bassa della schiena.',
-            photo: '/images/stacchi-rumeni.jpg',
+            name: 'Affondi con Bilanciere',
+            link: '/esercizi/affondi-bilanciere',
+            description: 'Esercizio funzionale che lavora su quadricipiti, glutei e stabilizza il core, migliorando coordinazione e equilibrio.',
+            photo: '/images/affondi-bilanciere.jpg',
             commonErrors: [
-              'Curvare la schiena durante il movimento',
-              'Portare il bilanciere troppo lontano dalle gambe',
-              'Non estendere completamente i fianchi'
+              'Avanzare troppo con il ginocchio anteriore',
+              'Perdere l\'equilibrio durante il movimento',
+              'Non mantenere il busto eretto',
+              'Movimento troppo veloce'
             ],
             solutions: [
-              'Mantenere la schiena neutra e il core attivato',
-              'Far scivolare il bilanciere vicino alle gambe',
-              'Estendere completamente i fianchi alla fine del movimento'
-            ]
+              'Mantenere il ginocchio posteriore vicino al suolo senza toccarlo',
+              'Usare un appoggio o iniziare senza peso per migliorare la stabilità',
+              'Mantenere il busto verticale e lo sguardo avanti',
+              'Eseguire il movimento con controllo e precisione'
+            ],
           },
           {
-            name: 'Pistol Squat',
-            link: '/esercizi/pistol-squat',
-            description: 'Esercizio avanzato a corpo libero per sviluppare forza e equilibrio nelle gambe.',
-            photo: '/images/pistol-squat.jpg',
+            name: 'Stacchi da Terra',
+            link: '/esercizi/stacchi-terra',
+            description: 'Esercizio composto che lavora posteriore, glutei, schiena e gambe, fondamentale per la forza globale del corpo.',
+            photo: '/images/stacchi-terra.jpg',
             commonErrors: [
-              'Perdere l’equilibrio durante il movimento',
-              'Non scendere abbastanza',
-              'Curvare la schiena per compensare'
+              'Arrotondare la schiena',
+              'Sollevare il bilanciere con la schiena invece che con le gambe',
+              'Non mantenere la barra vicina al corpo',
+              'Estendere troppo velocemente'
             ],
             solutions: [
-              'Esercitarsi con il supporto di una parete o una fascia elastica',
-              'Lavorare sulla mobilità per aumentare la profondità',
-              'Mantenere il busto eretto durante tutto il movimento'
-            ]
+              'Mantenere la schiena dritta e neutra durante tutto il movimento',
+              'Iniziare la fase di sollevamento spingendo con le gambe',
+              'Mantenere il bilanciere vicino al corpo durante tutto il movimento',
+              'Controllare sia la fase di sollevamento che di discesa'
+            ],
           },
           {
-            name: 'Hip Thrust',
-            link: '/esercizi/hip-thrust',
-            description: 'Esercizio specifico per i glutei, che permette una forte contrazione del muscolo.',
-            photo: '/images/hip-thrust.jpg',
+            name: 'Estensioni Quadricipiti',
+            link: '/esercizi/estensioni-quadricipiti',
+            description: 'Esercizio di isolamento per i quadricipiti, ottimo per definizione e rinforzo muscolare.',
+            photo: '/images/estensioni-quadricipiti.jpg',
             commonErrors: [
-              'Non mantenere la schiena dritta durante il movimento',
-              'Usare un carico troppo pesante',
-              'Non raggiungere una piena estensione dell’anca'
+              'Usare momentum invece della forza muscolare',
+              'Estendere completamente le ginocchia',
+              'Non controllare la fase negativa',
+              'Sollevare i glutei dalla seduta'
             ],
             solutions: [
-              'Posizionare correttamente la schiena su una panca stabile',
-              'Utilizzare un carico adeguato per un movimento controllato',
-              'Assicurarsi di raggiungere la massima contrazione dei glutei'
-            ]
+              'Movimento controllato senza utilizzare slancio',
+              'Fermarsi prima dell\'estensione completa per mantenere tensione',
+              'Scendere lentamente durante la fase eccentrica',
+              'Mantenere la schiena aderente alla seduta'
+            ],
           },
           {
-            name: 'Calf Raise',
-            link: '/esercizi/calf-raise',
-            description: 'Esercizio per allenare i muscoli del polpaccio, adatto a tutti i livelli.',
-            photo: '/images/calf-raise.jpg',
+            name: 'Curl Femorali',
+            link: '/esercizi/curl-femorali',
+            description: 'Esercizio di isolamento per i muscoli posteriori della coscia, importante per equilibrio muscolare e prevenzione degli infortuni.',
+            photo: '/images/curl-femorali.jpg',
             commonErrors: [
-              'Non controllare il movimento',
-              'Usare un range of motion limitato',
-              'Trascurare la fase di discesa'
+              'Sollevare i fianchi dalla seduta',
+              'Movimento troppo veloce',
+              'Non completare il range di movimento',
+              'Utilizzare un carico eccessivo'
             ],
             solutions: [
-              'Eseguire il movimento lentamente sia in salita che in discesa',
-              'Assicurarsi di lavorare su tutto il range di movimento',
-              'Evitare di rimbalzare durante il movimento'
-            ]
+              'Mantenere i fianchi fermi e aderenti alla seduta',
+              'Eseguire il movimento con controllo e lentezza',
+              'Portare i piedi completamente verso i glutei',
+              'Scegliere un carico che consenta un\'esecuzione corretta'
+            ],
           },
           {
-            name: 'Leg Curl',
-            link: '/esercizi/leg-curl',
-            description: 'Esercizio isolato per allenare i muscoli posteriori della coscia.',
-            photo: '/images/leg-curl.jpg',
+            name: 'Squat a Corpo Libero',
+            link: '/esercizi/squat-corpo-libero',
+            description: 'Variante dello squat senza carico, ottima per riscaldamento, tecnica e allenamento funzionale.',
+            photo: '/images/squat-corpo-libero.jpg',
             commonErrors: [
-              'Sollevare il bacino dal supporto',
-              'Non controllare il movimento durante il ritorno',
-              'Usare troppo peso'
+              'Ginocchia che si avvicinano troppo',
+              'Talloni che si sollevano',
+              'Non raggiungere la profondità corretta',
+              'Perdita di equilibrio'
             ],
             solutions: [
-              'Mantenere il bacino aderente al supporto',
-              'Eseguire il movimento lentamente e controllato',
-              'Utilizzare un peso adeguato alla propria forza'
-            ]
+              'Spingere le ginocchia verso l\'esterno',
+              'Mantenere i piedi completamente a terra',
+              'Scendere fino a che i fianchi siano sotto il livello delle ginocchia',
+              'Usare un supporto se necessario per migliorare l\'equilibrio'
+            ],
+          },
+          {
+            name: 'Step Up',
+            link: '/esercizi/step-up',
+            description: 'Esercizio funzionale che migliora forza, equilibrio e coordinazione, lavorando specificamente quadricipiti e glutei.',
+            photo: '/images/step-up.jpg',
+            commonErrors: [
+              'Spinta insufficiente',
+              'Non estendere completamente la gamba',
+              'Utilizzare un gradino troppo alto',
+              'Perdere l\'equilibrio'
+            ],
+            solutions: [
+              'Spingere decisamente con la gamba sul gradino',
+              'Portare completamente il corpo in estensione sul gradino',
+              'Scegliere un\'altezza appropriata alle proprie capacità',
+              'Usare un supporto o una ringhiera per stabilità iniziale'
+            ],
+          },
+          {
+            name: 'Walking Lunges',
+            link: '/esercizi/walking-lunges',
+            description: 'Variante dinamica degli affondi che migliora coordinazione, equilibrio e resistenza muscolare.',
+            photo: '/images/walking-lunges.jpg',
+            commonErrors: [
+              'Passi troppo corti',
+              'Perdita di equilibrio',
+              'Ginocchio anteriore che va oltre la punta del piede',
+              'Busto inclinato'
+            ],
+            solutions: [
+              'Eseguire passi lunghi e ampi',
+              'Mantenere un punto di riferimento statico durante il movimento',
+              'Assicurarsi che il ginocchio anteriore non superi la punta del piede',
+              'Mantenere il busto eretto e lo sguardo avanti'
+            ],
           },
           {
             name: 'Bulgarian Split Squat',
             link: '/esercizi/bulgarian-split-squat',
-            description: 'Esercizio per allenare gambe e glutei, con un’attenzione particolare all’equilibrio.',
+            description: 'Esercizio unilaterale che migliora forza, equilibrio e correzione degli squilibri muscolari.',
             photo: '/images/bulgarian-split-squat.jpg',
             commonErrors: [
-              'Perdere la stabilità durante il movimento',
-              'Non scendere abbastanza con il ginocchio posteriore',
-              'Spingere con il piede posteriore invece che con quello anteriore'
+              'Instabilità durante il movimento',
+              'Non raggiungere la profondità corretta',
+              'Perdita di equilibrio',
+              'Sovraccarico eccessivo'
             ],
             solutions: [
-              'Concentrarsi sulla stabilità mantenendo il core contratto',
-              'Scendere fino a sfiorare il pavimento con il ginocchio posteriore',
-              'Spingere principalmente con la gamba anteriore'
-            ]
-          },
-          {
-            name: 'Good Morning',
-            link: '/esercizi/good-morning',
-            description: 'Esercizio che rinforza i muscoli posteriori della coscia, i glutei e la parte bassa della schiena.',
-            photo: '/images/good-morning.jpg',
-            commonErrors: [
-              'Curvare la schiena durante il movimento',
-              'Non piegare le ginocchia a sufficienza',
-              'Usare un carico eccessivo'
+              'Iniziare senza carico per migliorare la tecnica',
+              'Scendere fino a che il ginocchio posteriore sia vicino al suolo',
+              'Usare un supporto per migliorare stabilità',
+              'Scegliere un carico che consenta un controllo completo'
             ],
-            solutions: [
-              'Mantenere la schiena neutra e il core attivo',
-              'Flettere leggermente le ginocchia durante l’esecuzione',
-              'Utilizzare un carico adatto alla propria forza'
-            ]
           }
-        ]
+        ],
       },
       {
         category: 'Spalle',
-        icon: <Scaling className="text-yellow-600" />,
+        icon: <Dumbbell className="text-yellow-500" />,
         exercises: [
           {
-            name: 'Shoulder Press',
-            link: '/esercizi/shoulder-press',
-            description: 'Esercizio per rafforzare i deltoidi e migliorare la forza delle spalle.',
-            photo: '/images/shoulder-press.jpg',
+            name: 'Overhead Press con Bilanciere',
+            link: '/esercizi/overhead-press',
+            description: 'Esercizio base per lo sviluppo delle spalle, in particolare del deltoide anteriore e del trapezio.',
+            photo: '/images/overhead-press.jpg',
             commonErrors: [
-              'Inarcare la schiena durante il movimento',
-              'Non portare i pesi completamente sopra la testa',
-              'Usare un carico eccessivo compromettendo la tecnica'
+              'Inarcare eccessivamente la schiena',
+              'Non mantenere i gomiti sotto il bilanciere',
+              'Usare un peso troppo elevato senza controllo',
             ],
             solutions: [
-              'Tenere la schiena dritta e i piedi ben piantati',
-              'Spingere i pesi direttamente sopra la testa',
-              'Utilizzare un carico adeguato per eseguire il movimento correttamente'
-            ]
-          },
-          {
-            name: 'Lateral Raise',
-            link: '/esercizi/lateral-raise',
-            description: 'Esercizio per isolare i deltoidi laterali e ottenere una forma delle spalle più tonde.',
-            photo: '/images/lateral-raise.jpg',
-            commonErrors: [
-              'Usare lo slancio per sollevare i pesi',
-              'Alzare le spalle durante il movimento',
-              'Non controllare la discesa dei pesi'
+              'Mantenere una leggera curva naturale nella schiena',
+              'Allineare i gomiti sotto il bilanciere',
+              'Scegliere un peso che permetta un movimento controllato',
             ],
-            solutions: [
-              'Eseguire il movimento lentamente e con controllo',
-              'Tenere le spalle basse e rilassate',
-              'Usare un carico leggero per mantenere una buona tecnica'
-            ]
           },
           {
-            name: 'Front Raise',
-            link: '/esercizi/front-raise',
-            description: 'Esercizio per rafforzare i deltoidi anteriori e migliorare la postura.',
-            photo: '/images/front-raise.jpg',
-            commonErrors: [
-              'Sollevare i pesi troppo in alto',
-              'Usare lo slancio del corpo per aiutarsi',
-              'Non mantenere il core contratto'
-            ],
-            solutions: [
-              'Sollevare i pesi fino all’altezza delle spalle',
-              'Eseguire movimenti lenti e controllati',
-              'Contrarre il core per stabilizzare il corpo'
-            ]
-          },
-          {
-            name: 'Arnold Press',
+            name: 'Arnold Press con Manubri',
             link: '/esercizi/arnold-press',
-            description: 'Variante del shoulder press che lavora su tutti i deltoidi e migliora la mobilità delle spalle.',
+            description: 'Variante dinamica della pressa per spalle, che coinvolge tutti i capi del deltoide.',
             photo: '/images/arnold-press.jpg',
             commonErrors: [
-              'Inarcare la schiena durante il movimento',
-              'Non eseguire una rotazione completa',
-              'Usare un carico eccessivo'
+              'Non controllare il movimento rotazionale',
+              'Inclinare troppo il busto all’indietro',
             ],
             solutions: [
-              'Tenere la schiena dritta e il core contratto',
-              'Eseguire una rotazione completa controllata',
-              'Utilizzare un peso adeguato per mantenere una buona tecnica'
-            ]
+              'Eseguire una rotazione lenta e controllata',
+              'Mantenere il busto dritto durante tutto il movimento',
+            ],
           },
           {
-            name: 'Face Pull',
+            name: 'Alzate Laterali con Manubri',
+            link: '/esercizi/alzate-laterali',
+            description: 'Esercizio isolante per il deltoide laterale, fondamentale per ottenere spalle larghe.',
+            photo: '/images/alzate-laterali.jpg',
+            commonErrors: [
+              'Usare lo slancio del corpo per sollevare i pesi',
+              'Alzare i manubri oltre il livello delle spalle',
+            ],
+            solutions: [
+              'Eseguire il movimento lentamente e senza slancio',
+              'Sollevare i manubri solo fino al livello delle spalle',
+            ],
+          },
+          {
+            name: 'Alzate Frontali con Manubri o Bilanciere',
+            link: '/esercizi/alzate-frontali',
+            description: 'Esercizio isolante per il deltoide anteriore, utile per migliorare l’aspetto frontale delle spalle.',
+            photo: '/images/alzate-frontali.jpg',
+            commonErrors: [
+              'Usare troppo peso e perdere il controllo',
+              'Non mantenere le spalle basse durante il movimento',
+            ],
+            solutions: [
+              'Scegliere un peso adeguato per un’esecuzione corretta',
+              'Mantenere le spalle rilassate e basse durante il movimento',
+            ],
+          },
+          {
+            name: 'Face Pull ai Cavi',
             link: '/esercizi/face-pull',
-            description: 'Esercizio per rafforzare i deltoidi posteriori e i muscoli della cuffia dei rotatori.',
+            description: 'Esercizio che lavora sul deltoide posteriore e migliora la postura delle spalle.',
             photo: '/images/face-pull.jpg',
             commonErrors: [
-              'Usare un carico eccessivo che compromette la tecnica',
-              'Non tirare il cavo verso il viso',
-              'Curvare la schiena durante il movimento'
+              'Non tenere i gomiti alti durante il movimento',
+              'Usare troppo peso',
             ],
             solutions: [
-              'Usare un carico moderato per mantenere una buona tecnica',
-              'Tirare il cavo fino all’altezza del viso, mantenendo i gomiti alti',
-              'Tenere la schiena dritta e il core contratto'
-            ]
+              'Mantenere i gomiti alti e in linea con le spalle',
+              'Scegliere un carico che permetta un movimento fluido e controllato',
+            ],
           },
           {
-            name: 'Overhead Dumbbell Press',
-            link: '/esercizi/overhead-dumbbell-press',
-            description: 'Esercizio classico per rafforzare i deltoidi e migliorare la forza generale delle spalle.',
-            photo: '/images/overhead-dumbbell-press.jpg',
+            name: 'Shrugs con Bilanciere o Manubri',
+            link: '/esercizi/shrugs',
+            description: 'Esercizio per sviluppare i trapezi e migliorare l’estetica delle spalle.',
+            photo: '/images/shrugs.jpg',
             commonErrors: [
-              'Inarcare la schiena durante il sollevamento',
-              'Non portare i pesi completamente sopra la testa',
-              'Usare un peso troppo elevato, compromettendo la stabilità'
+              'Ruotare le spalle durante il movimento',
+              'Non mantenere il collo rilassato',
             ],
             solutions: [
-              'Tenere la schiena dritta e il core attivato',
-              'Spingere i pesi direttamente sopra la testa',
-              'Utilizzare pesi adeguati per mantenere una buona tecnica'
-            ]
+              'Sollevare le spalle verso le orecchie senza ruotarle',
+              'Rilassare il collo durante il movimento',
+            ],
           },
           {
-            name: 'Upright Row',
-            link: '/esercizi/upright-row',
-            description: 'Esercizio per rafforzare i deltoidi laterali e migliorare la forza della parte superiore del corpo.',
-            photo: '/images/upright-row.jpg',
+            name: 'Pike Push-Up',
+            link: '/esercizi/pike-push-up',
+            description: 'Versione avanzata del push-up che concentra il lavoro sui deltoidi anteriori e laterali.',
+            photo: '/images/pike-push-up.jpg',
             commonErrors: [
-              'Portare i gomiti troppo in alto',
-              'Curvare la schiena durante il movimento',
-              'Usare un carico eccessivo'
+              'Posizionare le mani troppo larghe o troppo strette',
+              'Non mantenere un angolo adeguato tra busto e gambe',
             ],
             solutions: [
-              'Mantenere i gomiti allineati con le spalle',
-              'Tenere la schiena dritta e il core contratto',
-              'Utilizzare un carico adeguato per eseguire correttamente l’esercizio'
-            ]
+              'Allineare le mani con le spalle per una posizione stabile',
+              'Creare un angolo di circa 90 gradi tra busto e gambe',
+            ],
           },
           {
-            name: 'Reverse Fly',
+            name: 'Lento Avanti con Bilanciere da Seduto',
+            link: '/esercizi/lento-avanti',
+            description: 'Esercizio classico per costruire forza e massa nei deltoidi anteriori e laterali.',
+            photo: '/images/lento-avanti.jpg',
+            commonErrors: [
+              'Non abbassare il bilanciere fino al livello del mento',
+              'Spingere il peso in avanti invece che verso l’alto',
+            ],
+            solutions: [
+              'Portare il bilanciere fino al livello del mento prima di risalire',
+              'Spingere il bilanciere direttamente verso l’alto',
+            ],
+          },
+          {
+            name: 'Tirate al Mento con Bilanciere',
+            link: '/esercizi/tirate-mento',
+            description: 'Esercizio per il deltoide laterale e i trapezi, utile per aumentare la larghezza delle spalle.',
+            photo: '/images/tirate-mento.jpg',
+            commonErrors: [
+              'Alzare troppo il bilanciere oltre il livello delle spalle',
+              'Incurvare i polsi durante il movimento',
+            ],
+            solutions: [
+              'Fermarsi quando il bilanciere raggiunge il livello delle spalle',
+              'Mantenere i polsi dritti durante tutto il movimento',
+            ],
+          },
+          {
+            name: 'Reverse Fly su Panca Inclinata',
             link: '/esercizi/reverse-fly',
-            description: 'Esercizio per rafforzare i deltoidi posteriori e migliorare la postura.',
+            description: 'Esercizio per il deltoide posteriore e i muscoli scapolari, ideale per migliorare la postura.',
             photo: '/images/reverse-fly.jpg',
             commonErrors: [
-              'Usare slancio per sollevare i pesi',
-              'Non contrarre i muscoli della schiena',
-              'Curvare la schiena durante il movimento'
+              'Usare troppo peso e perdere la tecnica corretta',
+              'Non mantenere i gomiti leggermente flessi',
             ],
             solutions: [
-              'Eseguire movimenti lenti e controllati',
-              'Concentrarsi sulla contrazione dei muscoli della schiena',
-              'Tenere la schiena dritta e il core attivato'
-            ]
+              'Scegliere un peso che consenta un movimento controllato',
+              'Mantenere i gomiti leggermente piegati durante tutto il movimento',
+            ],
           },
-          {
-            name: 'Dumbbell Shrug',
-            link: '/esercizi/dumbbell-shrug',
-            description: 'Esercizio per rafforzare il trapezio e migliorare la forza della parte superiore delle spalle.',
-            photo: '/images/dumbbell-shrug.jpg',
-            commonErrors: [
-              'Usare un carico eccessivo',
-              'Ruotare le spalle durante il movimento',
-              'Non eseguire il movimento completo'
-            ],
-            solutions: [
-              'Utilizzare un carico moderato per eseguire correttamente l’esercizio',
-              'Sollevare le spalle direttamente verso l’alto',
-              'Mantenere il movimento lento e controllato'
-            ]
-          }
-        ]
+        ],
       },
       {
         category: 'Core',

@@ -114,7 +114,7 @@ export default function RootLayout({
         </Head>
         <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
           <Navbar />
-          <main className="flex-1 overflow-y-auto pb-10">
+          <main className="flex-1 overflow-y-auto pb-10" >
             {children}
           </main>
           <div className="hidden md:block">

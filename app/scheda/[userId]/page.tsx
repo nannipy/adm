@@ -58,8 +58,8 @@ const WorkoutScheda = () => {
   const [activeTab, setActiveTab] = useState("push")
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:px-20 xl:px-40">
-      <Card className="bg-transparent border-none shadow-none">
+    <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:px-20 xl:px-40 "   >
+      <Card className="bg-transparent border-none shadow-none ">
         <CardHeader className="text-center">
           <motion.h1 
             initial={{ y: -50, opacity: 0 }}
