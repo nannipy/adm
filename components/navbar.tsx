@@ -125,7 +125,7 @@ export default function Navbar() {
               <Home size={24} />
             </Link>
             <SignInButton mode="modal">
-              <button className="text-white bg-black p-2 rounded-full">
+              <button className="text-white bg-black p-5 rounded-2xl">
                 <LogIn size={24} />
               </button>
             </SignInButton>
