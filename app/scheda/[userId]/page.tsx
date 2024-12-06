@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react'
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent } from "@/components/ui/tabs"
-import { motion } from 'framer-motion';
-import { Workout, tabs, workoutSections } from '@/components/workout';
-import { Timer, Repeat } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
+import { Workout, tabs, workoutSections } from "@/components/workout";
+import { Timer, Repeat } from "lucide-react";
+
+const LOCAL_STORAGE_KEY = "workoutSections";
 
 const renderWorkoutTable = (workouts: Workout[]) => (
   <div className="w-full overflow-x-auto">
     <div className="space-y-2">
       {workouts.map((workout, index) => (
-        <div 
-          key={index} 
+        <div
+          key={index}
           className="bg-neutral-900 rounded-xl p-3 shadow-lg hover:bg-neutral-800/90 transition-all duration-300 ease-in-out"
         >
           <div className="flex items-center justify-between mb-1">
@@ -55,13 +57,27 @@ const renderWorkoutTable = (workouts: Workout[]) => (
 );
 
 const WorkoutScheda = () => {
-  const [activeTab, setActiveTab] = useState("push")
+  const [activeTab, setActiveTab] = useState("push");
+  const [savedWorkouts, setSavedWorkouts] = useState(workoutSections);
+
+  // Carica i dati da localStorage
+  useEffect(() => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedData) {
+      setSavedWorkouts(JSON.parse(storedData));
+    }
+  }, []);
+
+  // Salva i dati in localStorage ogni volta che vengono aggiornati
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedWorkouts));
+  }, [savedWorkouts]);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:px-20 xl:px-40 "   >
+    <div className="min-h-screen p-4 sm:p-6 md:p-8 lg:px-20 xl:px-40">
       <Card className="bg-transparent border-none shadow-none ">
         <CardHeader className="text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
@@ -70,11 +86,11 @@ const WorkoutScheda = () => {
             Scheda Allenamento
           </motion.h1>
         </CardHeader>
-        
-        <CardContent className='mt-4 mb-20 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8'>
-          <Tabs 
-            value={activeTab} 
-            onValueChange={setActiveTab} 
+
+        <CardContent className="mt-4 mb-20 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
             className="w-full"
           >
             <div className="flex justify-center mx-20 md:mx-96 space-x-2 sm:space-x-4 mb-6 sm:mb-10 bg-neutral-800/60 rounded-2xl p-2 sm:p-4">
@@ -88,32 +104,36 @@ const WorkoutScheda = () => {
                     font-medium text-white 
                     outline-sky-400 transition 
                     focus-visible:outline-2
-                    ${activeTab === tab.id ? 'text-black' : 'hover:text-gray-400'}
+                    ${activeTab === tab.id ? "text-black" : "hover:text-gray-400"}
                   `}
-                  style={{WebkitTapHighlightColor: "transparent"}}
+                  style={{ WebkitTapHighlightColor: "transparent" }}
                 >
                   {activeTab === tab.id && (
                     <motion.span
                       layoutId="bubble"
                       className="absolute inset-0 z-10 bg-white mix-blend-difference rounded-xl"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
                     />
                   )}
                   {tab.label}
                 </button>
               ))}
             </div>
-            
+
             <TabsContent value="push">
-              {renderWorkoutTable(workoutSections.push)}
+              {renderWorkoutTable(savedWorkouts.push)}
             </TabsContent>
-            
+
             <TabsContent value="pull">
-              {renderWorkoutTable(workoutSections.pull)}
+              {renderWorkoutTable(savedWorkouts.pull)}
             </TabsContent>
-            
+
             <TabsContent value="upper">
-              {renderWorkoutTable(workoutSections.upper)}
+              {renderWorkoutTable(savedWorkouts.upper)}
             </TabsContent>
           </Tabs>
         </CardContent>
